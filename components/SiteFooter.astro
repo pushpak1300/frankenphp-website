@@ -1,0 +1,55 @@
+---
+// The FrankenPHP footer: the slanted purple band with the elephant peeking
+// over it, the credits, and the main links. Used on every page — as Blume's
+// `Footer` layout slot on docs pages, and in the custom pages' footer slot.
+import { localeOfRoute, localizePath, stringsFor } from "./i18n";
+
+interface Props {
+  /** Passed by custom pages; docs pages pass Blume's own `locale` prop. */
+  locale?: string;
+}
+
+const locale = Astro.props.locale ?? localeOfRoute(Astro.url.pathname);
+const t = stringsFor(locale);
+const year = new Date().getFullYear();
+const links = [
+  { label: t.nav.docs, href: localizePath("/docs", locale) },
+  { label: t.nav.help, href: localizePath("/help", locale) },
+  { label: t.nav.shop, href: "https://frankenphp.tpopsite.com/shop" },
+  { label: "GitHub", href: "https://github.com/php/frankenphp" },
+];
+---
+
+<footer class="fp-footer relative mt-24 text-white">
+  <img
+    src="/img/elephant_footer.svg"
+    alt=""
+    width="96"
+    height="97"
+    loading="lazy"
+    decoding="async"
+    class="pointer-events-none absolute bottom-full left-1/2 h-24 w-24 -translate-x-1/2 translate-y-6"
+  />
+  <div class="fp-footer-band bg-fp-deep px-6 pt-24 pb-12">
+    <div class="mx-auto flex max-w-6xl flex-col items-center gap-8 text-center">
+      <nav aria-label="Footer" class="flex flex-wrap justify-center gap-x-8 gap-y-2 text-sm font-medium">
+        {
+          links.map((link) => (
+            <a class="fp-footer-link" href={link.href}>
+              {link.label}
+            </a>
+          ))
+        }
+      </nav>
+      <div class="flex max-w-2xl flex-col gap-1.5 text-sm leading-relaxed text-white/80">
+        <p set:html={t.footer.owner} />
+        <p set:html={t.footer.design} />
+        <p class="text-xs text-white/70" set:html={t.footer.sponsor} />
+      </div>
+      <a href="https://les-tilleuls.coop/en" class="opacity-80 transition-opacity hover:opacity-100">
+        <img src="/img/logo_tilleuls_white.svg" alt="Les-Tilleuls.coop" width="140" height="20" loading="lazy" class="h-5 w-auto" />
+      </a>
+      <p class="text-xs text-white/60">© {year} FrankenPHP · MIT License</p>
+    </div>
+  </div>
+</footer>

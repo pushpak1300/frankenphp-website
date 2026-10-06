@@ -1,0 +1,33 @@
+---
+// A homepage section: mono overtitle, large heading (its <strong class="hl">
+// part is highlighted), optional lead and "read the docs" link, then content.
+interface Props {
+  overtitle?: string;
+  title: string;
+  lead?: string;
+  href?: string;
+  hrefLabel?: string;
+  /** Bigger heading, for the first section after the hero. */
+  big?: boolean;
+}
+
+const { overtitle, title, lead, href, hrefLabel, big = false } = Astro.props;
+---
+
+<section class="mx-auto max-w-6xl px-6 pt-24 pb-4 md:pt-28">
+  <div class="mb-9 flex flex-wrap items-end justify-between gap-x-10 gap-y-4">
+    <div class="min-w-0 flex-[1_1_32rem]">
+      {overtitle && <p class="m-0 mb-3.5 font-mono text-[13px] text-muted-foreground">{overtitle}</p>}
+      <h2 class:list={["fp-heading m-0", big && "fp-heading-big"]} set:html={title} />
+      {lead && <p class="fp-rich m-0 mt-4 max-w-[38rem] text-lg leading-relaxed text-muted-foreground" set:html={lead} />}
+    </div>
+    {
+      href && (
+        <a href={href} class="inline-flex min-h-11 items-center gap-1.5 font-semibold text-fp-purple no-underline hover:underline dark:text-fp-green">
+          {hrefLabel} <span aria-hidden="true">→</span>
+        </a>
+      )
+    }
+  </div>
+  <slot />
+</section>

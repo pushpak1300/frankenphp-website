@@ -1,0 +1,88 @@
+---
+import CustomPage from "../CustomPage.astro";
+import { stringsFor } from "../i18n";
+
+interface Props {
+  locale: string;
+}
+
+const { locale } = Astro.props;
+const t = stringsFor(locale);
+const help = t.help;
+const contact = "mailto:contact@les-tilleuls.coop";
+
+const blocks = [
+  { ...help.migration, href: contact, image: "/img/migration.svg", width: 474, height: 553 },
+  { ...help.hosting, href: "https://les-tilleuls.coop/en/cloud-security", image: "/img/bellboy.svg", width: 1540, height: 1361 },
+  { ...help.services, href: "https://les-tilleuls.coop/en", image: "/img/love_php.svg", width: 1266, height: 976 },
+];
+const description = help.hero.content.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim().slice(0, 158);
+---
+
+<CustomPage
+  locale={locale}
+  path="/help"
+  title={`${t.nav.help} — FrankenPHP`}
+  description={description}
+  transparentHeader
+>
+  <section class="fp-hero relative -mt-16 overflow-hidden bg-fp-deep pt-16 text-white">
+    <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-12 px-6 pt-16 pb-36 md:pt-24">
+      <div class="flex min-w-0 flex-[999_1_30rem] flex-col items-start gap-6">
+        <p class="m-0 font-mono text-[13px] text-fp-green-light">{help.hero.overtitle}</p>
+        <h1 class="fp-heading fp-heading-big fp-heading-invert m-0" set:html={help.hero.title} />
+        <p class="fp-rich fp-rich-invert m-0 max-w-[38rem] text-lg leading-relaxed text-white/80" set:html={help.hero.content} />
+        <a href={contact} class="inline-flex h-13 items-center gap-2 rounded-xl bg-fp-green px-6 font-bold text-fp-deep no-underline transition-transform hover:-translate-y-0.5">
+          {help.hero.button} <span aria-hidden="true">→</span>
+        </a>
+      </div>
+      <div class="flex min-w-0 flex-[1_1_18rem] justify-center">
+        <img src="/img/franken-heart.svg" alt="" width="320" height="343" fetchpriority="high" class="h-auto w-full max-w-80" />
+      </div>
+    </div>
+  </section>
+
+  <div class="mx-auto flex max-w-6xl flex-col gap-24 px-6 pt-12">
+    {
+      blocks.map((block, i) => (
+        <section class:list={["flex flex-wrap items-center gap-12", i % 2 === 1 && "flex-row-reverse"]}>
+          <div class="min-w-0 flex-[999_1_28rem]">
+            <h2 class="fp-heading m-0 mb-5" set:html={block.title} />
+            <p class="fp-rich m-0 mb-7 text-base leading-relaxed text-foreground/85" set:html={block.content} />
+            <a href={block.href} class="inline-flex h-12 items-center gap-2 rounded-xl bg-fp-purple px-5 font-semibold text-white no-underline transition-transform hover:-translate-y-0.5 dark:bg-fp-green dark:text-fp-deep">
+              {block.button} <span aria-hidden="true">→</span>
+            </a>
+          </div>
+          <div class="flex min-w-0 flex-[1_1_16rem] justify-center">
+            <img src={block.image} alt="" width={block.width} height={block.height} loading="lazy" decoding="async" class="h-auto max-h-80 w-full max-w-80 object-contain" />
+          </div>
+        </section>
+      ))
+    }
+
+    <section class="flex flex-wrap items-center gap-10 rounded-3xl bg-fp-deep p-8 text-white md:p-12">
+      <div class="min-w-0 flex-[999_1_28rem]">
+        <h2 class="fp-heading fp-heading-invert m-0 mb-5" set:html={help.go.title} />
+        <p class="fp-rich fp-rich-invert m-0 text-base leading-relaxed text-white/80" set:html={help.go.content} />
+      </div>
+      <div class="flex min-w-0 flex-[1_1_16rem] justify-center">
+        <img src="/img/gokenstein.svg" alt="" width="1881" height="1510" loading="lazy" decoding="async" class="h-auto w-full max-w-80" />
+      </div>
+    </section>
+
+    <section>
+      <h2 class="fp-heading m-0 mb-3" set:html={help.further.title} />
+      <p class="m-0 mb-9 text-lg text-muted-foreground">{help.further.subtitle}</p>
+      <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(16rem,1fr))] gap-4 p-0">
+        {
+          help.further.content.map((item) => (
+            <li class="rounded-2xl border border-border bg-background p-6">
+              <h3 class="m-0 mb-2 text-base font-bold text-fp-deep dark:text-white">{item.title}</h3>
+              <p class="fp-rich m-0 text-sm leading-relaxed text-muted-foreground" set:html={item.content} />
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </div>
+</CustomPage>
