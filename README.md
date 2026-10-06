@@ -82,8 +82,13 @@ Set `FRANKENPHP_REPO=/path/to/frankenphp` to import from a local checkout instea
 
 ## Deployment
 
-Every push to `main` builds the site and deploys it to GitHub Pages (see `.github/workflows/deploy.yaml`).
-The workflow downloads `install.sh` and `install.ps1` from php/frankenphp so that `https://frankenphp.dev/install.sh` keeps serving the latest installer.
+`pnpm build` writes the static site to `dist/`, ready for any static host.
+Before building for production, download the installers from php/frankenphp so that `https://frankenphp.dev/install.sh` serves the latest version:
+
+```console
+curl -fsSL https://raw.githubusercontent.com/php/frankenphp/main/install.sh -o public/install.sh
+curl -fsSL https://raw.githubusercontent.com/php/frankenphp/main/install.ps1 -o public/install.ps1
+```
 
 ## SEO and AI agents
 
