@@ -1,0 +1,20 @@
+---
+interface Props {
+  invert?: boolean;
+  id?: string;
+  class?: string;
+}
+
+const { invert = false, id, class: className } = Astro.props;
+---
+
+<p
+  id={id}
+  class:list={[
+    "m-0 font-mono text-eyebrow",
+    invert ? "text-fp-green-light" : "text-muted-foreground",
+    className,
+  ]}
+>
+  <slot />
+</p>

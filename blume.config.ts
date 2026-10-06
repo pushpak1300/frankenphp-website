@@ -13,7 +13,6 @@ import zh from "./i18n/zh.json";
 const translations = { en, fr, es, zh, ja, "pt-br": ptBr, ru, tr };
 type Translation = typeof en;
 
-/** A per-locale label map, read from i18n/<locale>.json. */
 const t = (pick: (strings: Translation) => string) =>
   Object.fromEntries(
     Object.entries(translations).map(([locale, strings]) => [locale, pick(strings)])
@@ -45,7 +44,6 @@ export default defineConfig({
     root: "content",
   },
 
-  // Edit links point at this repository, where the docs now live.
   github: {
     owner: "dunglas",
     repo: "frankenphp-website",
@@ -97,12 +95,10 @@ export default defineConfig({
 
   search: pagefind(),
 
-  // Ratings need an analytics adapter to go anywhere; there is none.
   feedback: false,
 
   seo: {
     metatags: {
-      // `go get frankenphp.dev/...` vanity import path.
       "go-import": `frankenphp.dev git ${REPO}`,
       "theme-color": "#230143",
     },

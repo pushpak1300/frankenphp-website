@@ -1,20 +1,4 @@
 #!/usr/bin/env node
-// Imports the FrankenPHP documentation from php/frankenphp (docs/) into this
-// repository's content/ folder, converted to Blume content. The docs now live
-// here: edit them in content/ directly. Re-run this only to pull a fresh copy
-// from upstream, which REPLACES content/ (hence the required --force):
-//
-//   pnpm import-docs --force                              # clones php/frankenphp
-//   FRANKENPHP_REPO=../frankenphp pnpm import-docs --force  # local checkout
-//
-// What it does, per language:
-// - copies every docs Markdown file into a sidebar group folder such as
-//   content/fr/docs/(02-features)/mercure.md (the parenthesized folder groups
-//   the sidebar without changing the URL: /fr/docs/mercure),
-// - writes Blume frontmatter (title, description, SEO title, sidebar label),
-// - converts GitHub alerts (> [!TIP]) into styled callouts,
-// - rewrites links to clean routes (/docs/worker#anchor), which Blume moves
-//   into the reader's locale automatically.
 
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
@@ -28,7 +12,6 @@ const REPO_URL = "https://github.com/php/frankenphp";
 const BLOB_URL = `${REPO_URL}/blob/main`;
 const RAW_URL = "https://raw.githubusercontent.com/php/frankenphp/main";
 
-// Upstream folder (docs/<source>) → site locale code.
 const LANGUAGES = [
   { source: "en", locale: "en" },
   { source: "cn", locale: "zh" },
@@ -41,7 +24,6 @@ const LANGUAGES = [
 ];
 const LOCALE_CODES = LANGUAGES.map((l) => l.locale).filter((l) => l !== "en");
 
-// Sidebar groups. A page not listed here lands in "reference".
 const GROUPS = [
   { slug: "get-started", pages: ["classic", "worker", "migrate", "config"] },
   {
@@ -123,8 +105,6 @@ const STRINGS = {
 const IMAGE_EXT = /\.(png|jpe?g|gif|svg|webp|avif)$/i;
 const FENCE = /^\s*(```|~~~)/;
 
-// --- Fetch the upstream repository ---------------------------------------
-
 function checkout() {
   if (process.env.FRANKENPHP_REPO) {
     return { dir: path.resolve(process.env.FRANKENPHP_REPO), cleanup: () => {} };
@@ -140,9 +120,6 @@ function checkout() {
   return { dir, cleanup: () => fs.rmSync(dir, { recursive: true, force: true }) };
 }
 
-// --- Markdown helpers ----------------------------------------------------
-
-/** Splits upstream YAML frontmatter (title/description only) from the body. */
 function splitFrontmatter(source) {
   const match = source.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?/);
   if (!match) return { meta: {}, body: source };
@@ -154,7 +131,6 @@ function splitFrontmatter(source) {
   return { meta, body: source.slice(match[0].length) };
 }
 
-/** Plain text of an inline Markdown snippet (for titles and descriptions). */
 function plainText(markdown) {
   return markdown
     .replace(/!\[[^\]]*\]\([^)]*\)/g, "")
@@ -171,7 +147,6 @@ function truncate(text, max = 160) {
   return `${cut.slice(0, cut.lastIndexOf(" ")).replace(/[,;:.]$/, "")}…`;
 }
 
-/** Applies fn to each line outside fenced code blocks. */
 function mapProse(body, fn) {
   let fenced = false;
   return body
@@ -186,7 +161,6 @@ function mapProse(body, fn) {
     .join("\n");
 }
 
-/** Applies fn to the parts of a line that are not inline code spans. */
 function mapOutsideInlineCode(line, fn) {
   return line
     .split(/(`+[^`]*?`+)/)
@@ -194,7 +168,6 @@ function mapOutsideInlineCode(line, fn) {
     .join("");
 }
 
-/** Removes the first H1 (Blume renders the title itself) and returns it. */
 function extractTitle(body) {
   let fenced = false;
   const lines = body.split("\n");
@@ -210,7 +183,6 @@ function extractTitle(body) {
   return { title: "", body };
 }
 
-/** The first prose paragraph: its raw lines and where they sit in the body. */
 function firstParagraph(body) {
   const lines = body.split("\n");
   let fenced = false;
@@ -230,12 +202,6 @@ function firstParagraph(body) {
   return start === -1 ? null : { start, end: lines.length, raw: lines.slice(start).join(" ") };
 }
 
-/**
- * Upstream pages without a description get one from their first paragraph.
- * A plain-text paragraph moves into the frontmatter (Blume renders it as the
- * page's lead, so it would otherwise show twice); one with links or markup
- * stays in the body and only feeds the meta description.
- */
 function describe(body) {
   const paragraph = firstParagraph(body);
   if (!paragraph) return { body };
@@ -250,7 +216,6 @@ function describe(body) {
   };
 }
 
-/** Turns GitHub alerts into callouts styled by theme.css. */
 function convertAlerts(body, labels) {
   const lines = body.split("\n");
   const out = [];
@@ -284,15 +249,11 @@ function convertAlerts(body, labels) {
   return out.join("\n");
 }
 
-// --- Links ---------------------------------------------------------------
-
-/** Maps a docs file name or URL path to its site route, or null. */
 function docRoute(target) {
   const [rawPath, hash = ""] = target.split("#");
   const anchor = hash ? `#${hash}` : "";
   const absolute = /^https?:\/\/frankenphp\.dev/.test(rawPath);
   const clean = rawPath.replace(/^https?:\/\/frankenphp\.dev/, "");
-  // Locale codes, plus "cn": the old site's URLs and upstream links use it for zh.
   const locales = [...LOCALE_CODES, "cn"].join("|");
   if (clean === "" || clean === "./") return absolute ? `/${anchor}` : anchor || null;
   if (new RegExp(`^/(?:(?:${locales})/?)?$`).test(clean)) return `/${anchor}`;
@@ -338,9 +299,6 @@ function rewriteLinks(body, { repoPath, fileDir, assetsDir }) {
   );
 }
 
-// --- Navigation labels from the README ----------------------------------
-
-/** Link labels of the README's docs list (its second "## " section). */
 function navLabels(readme) {
   const sections = [...readme.matchAll(/^##\s.*$/gm)];
   const labels = {};
@@ -354,8 +312,6 @@ function navLabels(readme) {
   }
   return labels;
 }
-
-// --- Writing -------------------------------------------------------------
 
 const yaml = (value) => JSON.stringify(value);
 
@@ -454,8 +410,6 @@ function writeLanguage(repo, { source, locale }) {
 
   return pages.length + 1;
 }
-
-// --- Main ----------------------------------------------------------------
 
 if (fs.existsSync(CONTENT) && !process.argv.includes("--force")) {
   console.error(

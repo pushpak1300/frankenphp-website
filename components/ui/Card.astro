@@ -1,0 +1,15 @@
+---
+interface Props {
+  title: string;
+  content: string;
+  class?: string;
+}
+
+const { title, content, class: className } = Astro.props;
+---
+
+<li class:list={["flex flex-col gap-3 bg-background p-6", className]}>
+  <slot />
+  <h3 class="m-0 text-lg/snug font-bold text-heading" set:html={title} />
+  <p class="rich-text m-0 text-sm/relaxed text-muted-foreground" set:html={content} />
+</li>

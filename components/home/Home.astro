@@ -1,7 +1,10 @@
 ---
-import { Code } from "astro:components";
-
 import CustomPage from "../CustomPage.astro";
+import Button from "../ui/Button.astro";
+import Card from "../ui/Card.astro";
+import CodePanel from "../ui/CodePanel.astro";
+import Eyebrow from "../ui/Eyebrow.astro";
+import Heading from "../ui/Heading.astro";
 import CopyButton from "./CopyButton.astro";
 import Section from "./Section.astro";
 import { localizePath, stringsFor } from "../i18n";
@@ -15,11 +18,13 @@ const t = stringsFor(locale);
 const home = t.home;
 const docs = (path = "") => localizePath(`/docs${path}`, locale);
 
-// Highlight the part of the hero title after its last comma ("…, written in Go").
+const escape = (text: string) => text.replace(/&/g, "&amp;").replace(/</g, "&lt;");
 const heroTitle = home.hero.title.replace(/<[^>]+>/g, "").trim();
 const comma = Math.max(heroTitle.lastIndexOf(","), heroTitle.lastIndexOf("，"), heroTitle.lastIndexOf("、"));
-const heroLead = comma === -1 ? heroTitle : heroTitle.slice(0, comma + 1);
-const heroTail = comma === -1 ? "" : heroTitle.slice(comma + 1).trim();
+const heroHtml =
+  comma === -1
+    ? escape(heroTitle)
+    : `${escape(heroTitle.slice(0, comma + 1))} <strong>${escape(heroTitle.slice(comma + 1).trim())}</strong>`;
 
 const installCommand = "curl https://frankenphp.dev/install.sh | sh";
 
@@ -47,63 +52,52 @@ const tabs = [
   { id: "system", label: home.gettingStarted.staticTab, code: home.gettingStarted.standard },
   { id: "docker", label: home.gettingStarted.dockerTab, code: home.gettingStarted.docker },
 ];
+const chips = ["HTTPS", "HTTP/2", "HTTP/3", "zstd", "Brotli", "gzip", "Early Hints"];
 ---
 
-<CustomPage
-  locale={locale}
-  path="/"
-  title={t.meta.title}
-  description={t.meta.description}
-  transparentHeader
->
-  <section class="fp-hero relative -mt-16 overflow-hidden bg-fp-deep pt-16 text-white">
-    <div class="mx-auto flex max-w-6xl flex-wrap items-center gap-12 px-6 pt-16 pb-36 md:pt-24">
-      <div class="flex min-w-0 flex-[999_1_32rem] flex-col items-start gap-7">
+<CustomPage locale={locale} path="/" title={t.meta.title} description={t.meta.description} transparentHeader>
+  <section class="slant-b relative -mt-16 overflow-hidden bg-fp-night pt-16 text-white">
+    <div class="mx-auto grid max-w-6xl items-center gap-12 px-6 pt-16 pb-36 md:pt-24 lg:grid-cols-5">
+      <div class="flex min-w-0 flex-col items-start gap-7 lg:col-span-3">
         <a
           href="https://github.com/php/frankenphp/releases"
-          class="inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 font-mono text-[13px] text-fp-green-light no-underline transition-colors hover:border-fp-green/60 hover:bg-white/10"
+          class="inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 font-mono text-eyebrow text-fp-green-light no-underline transition-colors hover:border-fp-green/60 hover:bg-white/10"
         >
           <span class="size-2 rounded-full bg-fp-green" aria-hidden="true"></span>
           {t.ui.latestRelease} <span aria-hidden="true">→</span>
         </a>
-        <h1 class="m-0 font-display text-[clamp(2.75rem,6vw,5rem)] leading-[1.02] font-extrabold tracking-[-0.035em] text-balance">
-          {heroLead}{heroTail && <> <span class="text-fp-green">{heroTail}</span></>}
-        </h1>
-        <p class="m-0 max-w-[38rem] text-lg leading-relaxed text-white/80 md:text-xl">{t.meta.description}</p>
+        <Heading as="h1" size="xl" html={heroHtml} invert />
+        <p class="m-0 max-w-xl text-lg/relaxed text-white/80 md:text-xl/relaxed">{t.meta.description}</p>
         <div class="flex w-full flex-wrap items-center gap-3.5">
-          <div class="flex h-13 w-full max-w-full min-w-0 items-center gap-2 rounded-xl sm:w-auto border border-white/15 bg-fp-ink pr-1.5 pl-4 font-mono text-sm">
+          <div class="flex h-13 w-full min-w-0 items-center gap-2 rounded-xl border border-white/15 bg-fp-ink ps-4 pe-1.5 font-mono text-sm sm:w-auto">
             <span class="text-white/50" aria-hidden="true">$</span>
             <code class="min-w-0 flex-1 truncate text-white">{installCommand}</code>
             <CopyButton text={installCommand} label={t.ui.copy} copied={t.ui.copied} />
           </div>
-          <a
-            href={docs()}
-            class="inline-flex h-13 items-center gap-2 rounded-xl bg-fp-green px-6 font-bold text-fp-deep no-underline transition-transform hover:-translate-y-0.5"
-          >
-            {home.hero.cta} <span aria-hidden="true">→</span>
-          </a>
+          <Button href={docs()} variant="accent" size="lg">{home.hero.cta}</Button>
         </div>
       </div>
-      <div class="flex min-w-0 flex-[1_1_20rem] justify-center">
-        <img
-          src="/img/elephant_cover.svg"
-          alt="FrankenPHP"
-          width="440"
-          height="426"
-          fetchpriority="high"
-          class="h-auto w-full max-w-[27.5rem]"
-        />
-      </div>
+      <img
+        src="/img/elephant_cover.svg"
+        alt="FrankenPHP"
+        width="440"
+        height="426"
+        fetchpriority="high"
+        class="mx-auto h-auto w-full max-w-md lg:col-span-2"
+      />
     </div>
   </section>
 
   <section class="mx-auto max-w-6xl px-6 pt-8 pb-20 text-center" aria-labelledby="technos-title">
-    <p id="technos-title" class="m-0 mb-7 font-mono text-[13px] text-muted-foreground">{home.technos.title}</p>
+    <Eyebrow id="technos-title" class="mb-7">{home.technos.title}</Eyebrow>
     <ul class="m-0 flex list-none flex-wrap items-center justify-center gap-x-11 gap-y-5 p-0">
       {
         home.technos.items.map((item) => (
           <li>
-            <a href={item.url} class="flex h-12 items-center opacity-80 grayscale-[35%] transition hover:opacity-100 hover:grayscale-0 dark:brightness-0 dark:invert dark:hover:brightness-100 dark:hover:invert-0">
+            <a
+              href={item.url}
+              class="flex h-12 items-center opacity-80 grayscale-35 transition hover:opacity-100 hover:grayscale-0 dark:brightness-0 dark:invert dark:hover:brightness-100 dark:hover:invert-0"
+            >
               <img src={item.image} alt={item.title} width="90" height="36" loading="lazy" decoding="async" class="h-9 w-auto" />
             </a>
           </li>
@@ -112,9 +106,9 @@ const tabs = [
     </ul>
   </section>
 
-  <div class="border-t border-border bg-fp-mist dark:bg-white/[0.02]">
+  <div class="border-t border-border bg-surface-tint">
     <Section overtitle={home.gettingStarted.overtitle} title={home.gettingStarted.title} lead={home.gettingStarted.content} big>
-      <div class="fp-code-card overflow-hidden rounded-2xl" data-fp-tabs>
+      <div class="overflow-hidden rounded-2xl bg-code-surface" data-fp-tabs>
         <div role="tablist" aria-label={home.gettingStarted.overtitle} class="flex flex-wrap gap-1 border-b border-white/10 px-2 pt-2">
           {
             tabs.map((tab, i) => (
@@ -125,7 +119,7 @@ const tabs = [
                 aria-controls={`fp-panel-${tab.id}`}
                 aria-selected={i === 0 ? "true" : "false"}
                 tabindex={i === 0 ? 0 : -1}
-                class="fp-tab min-h-11 cursor-pointer rounded-t-lg px-4 font-mono text-[13px]"
+                class="min-h-11 cursor-pointer rounded-t-lg border-b-2 border-transparent px-4 font-mono text-eyebrow text-white/60 transition-colors hover:text-white aria-selected:border-fp-green aria-selected:bg-white/5 aria-selected:text-fp-green"
               >
                 {tab.label}
               </button>
@@ -134,11 +128,12 @@ const tabs = [
         </div>
         {
           tabs.map((tab, i) => (
-            <div role="tabpanel" id={`fp-panel-${tab.id}`} aria-labelledby={`fp-tab-${tab.id}`} hidden={i !== 0} class="relative">
-              <div class="absolute top-2 right-2">
-                <CopyButton text={tab.code.replace(/^#.*\n/gm, "").trim()} label={t.ui.copy} copied={t.ui.copied} />
-              </div>
-              <Code code={tab.code} lang="bash" theme="dracula" class="fp-code" />
+            <div role="tabpanel" id={`fp-panel-${tab.id}`} aria-labelledby={`fp-tab-${tab.id}`} hidden={i !== 0}>
+              <CodePanel code={tab.code} lang="bash" class="relative">
+                <div class="absolute end-2 top-2">
+                  <CopyButton text={tab.code.replace(/^#.*\n/gm, "").trim()} label={t.ui.copy} copied={t.ui.copied} />
+                </div>
+              </CodePanel>
             </div>
           ))
         }
@@ -147,49 +142,36 @@ const tabs = [
   </div>
 
   <Section overtitle={home.config.overtitle} title={home.config.title} href={docs("/config")} hrefLabel={t.nav.docs}>
-    <div class="flex flex-wrap overflow-hidden rounded-2xl border border-border">
-      <div class="fp-code-card min-w-0 flex-[1_1_30rem]">
-        <div class="flex h-11 items-center border-b border-white/10 px-4 font-mono text-[13px] text-white/60">Caddyfile</div>
-        <Code code={home.config.code.trim()} lang="caddyfile" theme="dracula" class="fp-code" />
-      </div>
-      <div class="flex min-w-0 flex-[1_1_22rem] flex-col justify-center gap-6 bg-background p-8">
-        <p class="fp-rich m-0 text-base leading-relaxed text-foreground/85" set:html={home.config.content} />
-        <ul class="m-0 flex list-none flex-wrap gap-2 p-0 font-mono text-[13px]">
-          {["HTTPS", "HTTP/2", "HTTP/3", "zstd", "Brotli", "gzip", "Early Hints"].map((chip) => (
-            <li class="rounded-full border border-border bg-muted px-3 py-1 text-foreground">{chip}</li>
-          ))}
+    <div class="grid overflow-hidden rounded-2xl border border-border @3xl:grid-cols-5">
+      <CodePanel code={home.config.code} lang="caddyfile" filename="Caddyfile" class="@3xl:col-span-3" />
+      <div class="flex flex-col justify-center gap-6 bg-background p-8 @3xl:col-span-2">
+        <p class="rich-text m-0 text-base/relaxed text-foreground/85" set:html={home.config.content} />
+        <ul class="m-0 flex list-none flex-wrap gap-2 p-0 font-mono text-eyebrow">
+          {chips.map((chip) => <li class="rounded-full border border-border bg-muted px-3 py-1 text-foreground">{chip}</li>)}
         </ul>
       </div>
     </div>
   </Section>
 
   <Section overtitle={home.worker.overtitle} title={home.worker.title} href={docs("/worker")} hrefLabel={t.nav.docs}>
-    <div class="flex flex-wrap overflow-hidden rounded-2xl border border-border">
-      <div class="fp-code-card min-w-0 flex-[1_1_34rem]">
-        <div class="flex h-11 items-center border-b border-white/10 px-4 font-mono text-[13px] text-white/60">public/index.php</div>
-        <Code code={workerScript} lang="php" theme="dracula" class="fp-code" />
-      </div>
-      <div class="flex min-w-0 flex-[1_1_20rem] items-center justify-center bg-fp-green-wash p-8 dark:bg-fp-green/10">
-        <img src="/img/worker2.svg" alt="" width="360" height="281" loading="lazy" decoding="async" class="h-auto w-full max-w-[22.5rem]" />
+    <div class="grid overflow-hidden rounded-2xl border border-border @3xl:grid-cols-5">
+      <CodePanel code={workerScript} lang="php" filename="public/index.php" class="@3xl:col-span-3" />
+      <div class="flex items-center justify-center bg-surface-wash p-8 @3xl:col-span-2">
+        <img src="/img/worker2.svg" alt="" width="360" height="281" loading="lazy" decoding="async" class="h-auto w-full max-w-sm" />
       </div>
     </div>
-    <ul class="m-0 mt-6 grid list-none grid-cols-[repeat(auto-fit,minmax(15rem,1fr))] gap-4 p-0">
-      {
-        home.worker.items.map((item) => (
-          <li class="rounded-2xl border border-border bg-background p-5.5">
-            <h3 class="m-0 mb-2 text-base font-bold text-fp-deep dark:text-white" set:html={item.title} />
-            <p class="fp-rich m-0 text-sm leading-relaxed text-muted-foreground" set:html={item.content} />
-          </li>
-        ))
-      }
+    <ul class="m-0 mt-6 grid list-none gap-4 p-0 @lg:grid-cols-2 @4xl:grid-cols-4">
+      {home.worker.items.map((item) => <Card title={item.title} content={item.content} class="rounded-2xl border border-border" />)}
     </ul>
   </Section>
 
   <div class="mx-auto max-w-6xl px-6 pt-24">
-    <div class="flex flex-wrap items-center gap-10 rounded-3xl bg-fp-lilac p-8 md:p-12 dark:bg-white/[0.04]">
-      <div class="min-w-0 flex-[999_1_30rem]">
-        <p class="m-0 mb-3.5 font-mono text-[13px] text-muted-foreground">{home.modern.overtitle}</p>
-        <h2 class="fp-heading m-0 mb-7" set:html={home.modern.title} />
+    <div class="grid items-center gap-10 rounded-3xl bg-surface-soft p-8 md:p-12 lg:grid-cols-5">
+      <div class="flex min-w-0 flex-col items-start gap-7 lg:col-span-3">
+        <div class="flex flex-col gap-3.5">
+          <Eyebrow>{home.modern.overtitle}</Eyebrow>
+          <Heading html={home.modern.title} />
+        </div>
         <ul class="m-0 flex list-none flex-col gap-3.5 p-0">
           {
             home.modern.items.map((item) => (
@@ -197,44 +179,36 @@ const tabs = [
                 <span class="mt-0.5 flex size-6.5 flex-none items-center justify-center rounded-full bg-fp-purple text-fp-green" aria-hidden="true">
                   <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7" /></svg>
                 </span>
-                <span class="fp-rich text-base leading-relaxed text-foreground/90" set:html={item} />
+                <span class="rich-text text-base/relaxed text-foreground/90" set:html={item} />
               </li>
             ))
           }
         </ul>
-        <a href={docs()} class="mt-8 inline-flex h-12 items-center gap-2 rounded-xl bg-fp-purple px-5 font-semibold text-white no-underline transition-transform hover:-translate-y-0.5 dark:bg-fp-green dark:text-fp-deep">
-          {home.modern.cta} <span aria-hidden="true">→</span>
-        </a>
+        <Button href={docs()}>{home.modern.cta}</Button>
       </div>
-      <div class="flex min-w-0 flex-[1_1_16rem] justify-center">
-        <img src="/img/dab.svg" alt="" width="340" height="378" loading="lazy" decoding="async" class="h-auto w-full max-w-[21rem]" />
-      </div>
+      <img src="/img/dab.svg" alt="" width="340" height="378" loading="lazy" decoding="async" class="mx-auto h-auto w-full max-w-xs lg:col-span-2" />
     </div>
   </div>
 
   <Section overtitle={home.features.overtitle} title={home.features.title}>
-    <ul class="m-0 grid list-none grid-cols-[repeat(auto-fit,minmax(16rem,1fr))] gap-px overflow-hidden rounded-2xl border border-border bg-border p-0">
+    <ul class="m-0 grid list-none gap-px overflow-hidden rounded-2xl border border-border bg-border p-0 @xl:grid-cols-2 @4xl:grid-cols-4">
       {
         home.features.items.map((item) => (
-          <li class="flex flex-col gap-3.5 bg-background p-7">
+          <Card title={item.title} content={item.content} class="p-7">
             <img src={item.icon} alt="" width="56" height="56" loading="lazy" decoding="async" class="size-14 object-contain" />
-            <h3 class="m-0 text-[17px] font-bold text-fp-deep dark:text-white">{item.title}</h3>
-            <p class="fp-rich m-0 text-sm leading-relaxed text-muted-foreground" set:html={item.content} />
-          </li>
+          </Card>
         ))
       }
     </ul>
   </Section>
 
   <div class="mx-auto max-w-6xl px-6">
-    <div class="flex flex-wrap items-center justify-between gap-x-10 gap-y-7 rounded-3xl bg-fp-purple p-8 text-white md:p-12">
-      <div class="min-w-0 flex-[1_1_30rem]">
-        <p class="m-0 mb-3 font-mono text-[13px] text-white/70">{t.help.hero.overtitle}</p>
-        <h2 class="fp-heading fp-heading-invert m-0" set:html={t.help.hero.title} />
+    <div class="flex flex-wrap items-center justify-between gap-x-10 gap-y-7 rounded-3xl bg-fp-purple p-8 md:p-12">
+      <div class="flex max-w-2xl min-w-0 flex-col gap-3">
+        <Eyebrow invert>{t.help.hero.overtitle}</Eyebrow>
+        <Heading html={t.help.hero.title} invert />
       </div>
-      <a href={localizePath("/help", locale)} class="inline-flex h-13 items-center gap-2 rounded-xl bg-fp-green px-6 font-bold text-fp-deep no-underline transition-transform hover:-translate-y-0.5">
-        {t.nav.help} <span aria-hidden="true">→</span>
-      </a>
+      <Button href={localizePath("/help", locale)} variant="accent" size="lg">{t.nav.help}</Button>
     </div>
   </div>
 </CustomPage>

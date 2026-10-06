@@ -28,7 +28,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
         with:
-          # Full history so each page gets its "Last updated" date from git.
           fetch-depth: 0
       - name: Setup pnpm
         uses: pnpm/action-setup@v4

@@ -1,6 +1,4 @@
 ---
-// Shared shell for the custom (non-docs) pages: Blume's PageLayout with the
-// FrankenPHP footer, wired for the page's locale.
 import PageLayout from "blume/components/layout/PageLayout.astro";
 import data from "blume:data";
 
@@ -9,7 +7,6 @@ import { localeSwitch, localizePath } from "./i18n";
 
 interface Props {
   locale: string;
-  /** The page's route in the default locale (`/`, `/help`). */
   path: string;
   title: string;
   description: string;

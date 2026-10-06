@@ -1,0 +1,24 @@
+---
+import { Code } from "astro:components";
+
+interface Props {
+  code: string;
+  lang: string;
+  filename?: string;
+  class?: string;
+}
+
+const { code, lang, filename, class: className } = Astro.props;
+---
+
+<div class:list={["min-w-0 bg-code-surface", className]}>
+  {
+    filename && (
+      <div class="flex h-11 items-center border-b border-white/10 px-4 font-mono text-eyebrow text-white/60">
+        {filename}
+      </div>
+    )
+  }
+  <slot />
+  <Code code={code.trim()} lang={lang} theme="dracula" class="m-0 overflow-x-auto bg-transparent! px-6 py-5 text-sm/7" />
+</div>

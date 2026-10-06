@@ -29,26 +29,22 @@ export const isLocale = (value: string | undefined): value is Locale =>
 export const stringsFor = (locale: string | undefined): Strings =>
   LOCALES[isLocale(locale) ? locale : DEFAULT_LOCALE].strings as Strings;
 
-/** Prefixes a root-relative path with the locale (none for the default). */
 export const localizePath = (path: string, locale: string): string =>
   locale === DEFAULT_LOCALE || !path.startsWith("/")
     ? path
     : `/${locale}${path === "/" ? "" : path}`;
 
-/** The locale of a route (`/fr/docs/worker` → `fr`). */
 export const localeOfRoute = (route: string): Locale => {
   const first = route.split("/")[1];
   return isLocale(first) ? first : DEFAULT_LOCALE;
 };
 
-/** A route without its locale prefix (`/fr/docs/worker` → `/docs/worker`). */
 export const unlocalizedRoute = (route: string): string => {
   const locale = localeOfRoute(route);
   if (locale === DEFAULT_LOCALE) return route;
   return route.slice(locale.length + 1) || "/";
 };
 
-/** Language-switcher entries for a custom page served in every locale. */
 export const localeSwitch = (path: string, current: string) =>
   Object.entries(LOCALES).map(([code, { label }]) => ({
     code,

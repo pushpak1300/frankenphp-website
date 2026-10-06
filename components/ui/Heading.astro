@@ -1,0 +1,25 @@
+---
+interface Props {
+  html: string;
+  as?: "h1" | "h2";
+  size?: "md" | "lg" | "xl";
+  invert?: boolean;
+  class?: string;
+}
+
+const { html, as: Tag = "h2", size = "md", invert = false, class: className } = Astro.props;
+---
+
+<Tag
+  class:list={[
+    "m-0 font-display font-bold tracking-tight text-balance",
+    {
+      "text-3xl/tight sm:text-4xl/tight lg:text-5xl/tight": size === "md",
+      "text-4xl/tight sm:text-5xl/tight lg:text-6xl/none": size === "lg",
+      "text-5xl/none font-extrabold sm:text-6xl/none lg:text-7xl/none": size === "xl",
+    },
+    invert ? "heading-highlight-invert text-white" : "heading-highlight text-heading",
+    className,
+  ]}
+  set:html={html}
+/>

@@ -1,56 +1,130 @@
-/*
- * FrankenPHP theme for Blume: the brand's purple and green, Poppins, and the
- * slanted bands of the original frankenphp.dev, on Blume's design tokens.
- */
-
 @theme {
-  --color-fp-purple: #390075;
-  --color-fp-deep: #230143;
-  --color-fp-ink: #17002d;
-  --color-fp-green: #b3d133;
-  --color-fp-green-light: #e8efc8;
-  --color-fp-green-dark: #5f6e1a;
-  --color-fp-green-wash: #f4f8e4;
-  --color-fp-lilac: #f3eff8;
-  --color-fp-mist: #faf8fc;
-  --spacing-13: 3.25rem;
+  --color-fp-purple: oklch(30.07% 0.165 295.18);
+  --color-fp-night: oklch(21.38% 0.1115 300.31);
+  --color-fp-ink: oklch(16.7% 0.0879 302.44);
+  --color-fp-void: oklch(14.14% 0.0718 309.14);
+  --color-fp-abyss: oklch(11.71% 0.0599 307.86);
+  --color-fp-plum: oklch(24.44% 0.0963 302.66);
+  --color-fp-green: oklch(81.12% 0.1768 120.16);
+  --color-fp-green-dark: oklch(50.89% 0.1075 119.32);
+  --color-fp-green-light: oklch(93.68% 0.0517 115.67);
+  --color-fp-green-wash: oklch(97.08% 0.0266 116.08);
+  --color-fp-lime: oklch(87.21% 0.1499 119.7);
+  --color-fp-lilac: oklch(95.78% 0.0127 306.03);
+  --color-fp-mist: oklch(98.18% 0.0057 308.4);
+  --text-eyebrow: 0.8125rem;
+  --text-eyebrow--line-height: 1.25rem;
 }
 
 :root {
-  --blume-foreground: #1c1029;
-  --blume-muted: #f3eff8;
-  --blume-muted-foreground: #5b4d6d;
-  --blume-border: #e7e1ef;
-  --blume-code-background: #f3eff8;
+  --blume-foreground: oklch(20.34% 0.0503 304.48);
+  --blume-muted: var(--color-fp-lilac);
+  --blume-muted-foreground: oklch(44.7% 0.0541 304.3);
+  --blume-border: oklch(91.85% 0.0198 305.25);
+  --blume-code-background: var(--color-fp-lilac);
   --blume-content-width: 46rem;
-  --fp-code-bg: #230143;
-  --fp-heading: #230143;
-  --fp-link: #390075;
-  --fp-link-hover-bg: #e8efc8;
-  --fp-inline-code: #390075;
+
+  --fp-heading: var(--color-fp-night);
+  --fp-link: var(--color-fp-purple);
+  --fp-link-hover: var(--color-fp-green-light);
+  --fp-highlight: var(--color-fp-green-dark);
+  --fp-inline-code: var(--color-fp-purple);
+  --fp-code-surface: var(--color-fp-night);
+  --fp-surface-tint: var(--color-fp-mist);
+  --fp-surface-soft: var(--color-fp-lilac);
+  --fp-surface-wash: var(--color-fp-green-wash);
+  --fp-primary: var(--color-fp-purple);
+  --fp-primary-foreground: #fff;
 }
 
 :root[data-theme="dark"] {
-  --blume-background: #12001f;
-  --blume-foreground: #ece6f3;
-  --blume-muted: #1d0636;
-  --blume-muted-foreground: #b3a6c4;
-  --blume-border: #2e1748;
-  --blume-code-background: #2a0f45;
-  --fp-code-bg: #0b0016;
-  --fp-heading: #ffffff;
-  --fp-link: #c9e36a;
-  --fp-link-hover-bg: rgb(179 209 51 / 0.14);
-  --fp-inline-code: #d4e88a;
+  --blume-background: var(--color-fp-void);
+  --blume-foreground: oklch(93.34% 0.0185 306.66);
+  --blume-muted: oklch(19.82% 0.0876 300.42);
+  --blume-muted-foreground: oklch(74.59% 0.0448 304.94);
+  --blume-border: oklch(26.51% 0.0885 302.36);
+  --blume-code-background: var(--color-fp-plum);
+
+  --fp-heading: #fff;
+  --fp-link: var(--color-fp-lime);
+  --fp-link-hover: oklch(81.12% 0.1768 120.16 / 0.14);
+  --fp-highlight: var(--color-fp-green);
+  --fp-inline-code: oklch(89.53% 0.1207 118.73);
+  --fp-code-surface: var(--color-fp-abyss);
+  --fp-surface-tint: oklch(100% 0 0 / 0.02);
+  --fp-surface-soft: oklch(100% 0 0 / 0.04);
+  --fp-surface-wash: oklch(81.12% 0.1768 120.16 / 0.1);
+  --fp-primary: var(--color-fp-green);
+  --fp-primary-foreground: var(--color-fp-night);
 }
 
-/* ---------- Header ---------- */
+@theme inline {
+  --color-heading: var(--fp-heading);
+  --color-link: var(--fp-link);
+  --color-highlight: var(--fp-highlight);
+  --color-code-surface: var(--fp-code-surface);
+  --color-surface-tint: var(--fp-surface-tint);
+  --color-surface-soft: var(--fp-surface-soft);
+  --color-surface-wash: var(--fp-surface-wash);
+  --color-primary: var(--fp-primary);
+  --color-primary-foreground: var(--fp-primary-foreground);
+}
+
+@utility slant-b {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 7rem), 0 100%);
+}
+
+@utility slant-t {
+  clip-path: polygon(0 4rem, 100% 0, 100% 100%, 0 100%);
+}
+
+@utility heading-highlight {
+  & :is(strong, .hl) {
+    color: var(--color-highlight);
+    font-weight: inherit;
+  }
+}
+
+@utility heading-highlight-invert {
+  & :is(strong, .hl) {
+    color: var(--color-fp-green);
+    font-weight: inherit;
+  }
+}
+
+@utility rich-text {
+  & a {
+    color: var(--color-link);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  & a:hover {
+    text-decoration: underline;
+  }
+
+  & strong {
+    color: inherit;
+    font-weight: 700;
+  }
+}
+
+@utility rich-text-invert {
+  & :is(a, .hl) {
+    color: var(--color-fp-green);
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  & a:hover {
+    text-decoration: underline;
+  }
+}
 
 header img[alt="FrankenPHP"] {
   height: 1.5rem;
 }
 
-/* Over the dark hero, the transparent header needs the light-on-dark logo. */
 :root:not([data-theme="dark"]) [data-blume-header-transparent]:not([data-blume-header-scrolled]) img[src$="logo_lightbg.svg"] {
   display: none;
 }
@@ -59,52 +133,51 @@ header img[alt="FrankenPHP"] {
   display: block;
 }
 
-/* ---------- Docs prose ---------- */
+main h1:not([class]) {
+  color: var(--color-heading);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
 
 .prose {
   font-size: 1rem;
   line-height: 1.75;
   color: var(--blume-foreground);
-  --tw-prose-headings: var(--fp-heading);
-  --tw-prose-bold: var(--fp-heading);
+  --tw-prose-headings: var(--color-heading);
+  --tw-prose-bold: var(--color-heading);
 }
 
 .prose :where(h1, h2, h3, h4) {
-  color: var(--fp-heading);
+  color: var(--color-heading);
   letter-spacing: -0.02em;
 }
 
 .prose :where(h2):not(:where(.not-prose *)) {
   position: relative;
   padding-bottom: 0.75rem;
-}
 
-.prose :where(h2):not(:where(.not-prose *))::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 3.5rem;
-  height: 4px;
-  border-radius: 4px;
-  background: var(--color-fp-green);
-}
-
-[dir="rtl"] .prose :where(h2)::after {
-  left: auto;
-  right: 0;
+  &::after {
+    content: "";
+    position: absolute;
+    inset-inline-start: 0;
+    bottom: 0;
+    width: 3.5rem;
+    height: 4px;
+    border-radius: 4px;
+    background: var(--color-fp-green);
+  }
 }
 
 .prose :where(a):not(:where(.not-prose *, [data-blume-card], h1 *, h2 *, h3 *, h4 *)) {
-  color: var(--fp-link);
+  color: var(--color-link);
   font-weight: 600;
   text-decoration: none;
   border-radius: 3px;
   transition: background-color 0.2s ease;
-}
 
-.prose :where(a):not(:where(.not-prose *, [data-blume-card], h1 *, h2 *, h3 *, h4 *)):hover {
-  background-color: var(--fp-link-hover-bg);
+  &:hover {
+    background-color: var(--fp-link-hover);
+  }
 }
 
 .prose :not(pre) > code:not(:where([class~="not-prose"] *)) {
@@ -114,291 +187,131 @@ header img[alt="FrankenPHP"] {
   font-size: 0.875em;
 }
 
-/* Blume draws code blocks on the page background; FrankenPHP's are purple. */
+/* Blume's own code-block rules are !important, so these overrides must be too. */
 .prose pre.astro-code,
 .prose blume-tabs pre,
 .prose .not-prose > div > pre {
-  background: var(--fp-code-bg) !important;
+  background: var(--color-code-surface) !important;
   border-color: transparent;
 }
 
 .prose blume-tabs {
-  background: var(--fp-code-bg);
+  background: var(--color-code-surface);
   border-color: transparent;
-}
 
-.prose blume-tabs [role="tab"] {
-  color: rgb(255 255 255 / 0.6);
-}
+  & [role="tab"] {
+    color: oklch(100% 0 0 / 0.6);
+  }
 
-.prose blume-tabs [role="tab"][aria-selected="true"] {
-  color: var(--color-fp-green);
+  & [role="tab"][aria-selected="true"] {
+    color: var(--color-fp-green);
+  }
 }
 
 .prose :where(pre[data-language])::before {
-  color: rgb(255 255 255 / 0.6);
-  border-bottom-color: rgb(255 255 255 / 0.1);
+  color: oklch(100% 0 0 / 0.6);
+  border-bottom-color: oklch(100% 0 0 / 0.1);
 }
 
-.prose pre > [data-blume-copy],
-.prose pre > [data-blume-ask],
-.prose blume-tabs [data-blume-copy] {
+.prose :is(pre > [data-blume-copy], pre > [data-blume-ask], blume-tabs [data-blume-copy]) {
   background: transparent !important;
   border-color: transparent !important;
-  color: rgb(255 255 255 / 0.6) !important;
-}
+  color: oklch(100% 0 0 / 0.6) !important;
 
-.prose pre > [data-blume-copy]:hover,
-.prose pre > [data-blume-ask]:hover,
-.prose blume-tabs [data-blume-copy]:hover {
-  background: rgb(255 255 255 / 0.1) !important;
-  color: #ffffff !important;
+  &:hover {
+    background: oklch(100% 0 0 / 0.1) !important;
+    color: #fff !important;
+  }
 }
-
-/* The docs page title (Blume renders it outside .prose, without a class). */
-main h1:not([class]) {
-  color: var(--fp-heading);
-  font-weight: 700;
-  letter-spacing: -0.035em;
-}
-
-/* ---------- Callouts (converted from GitHub alerts) ---------- */
 
 .fp-callout {
-  --fp-callout: #390075;
-  --fp-callout-bg: #f3eff8;
+  --callout: var(--color-fp-purple);
+  --callout-bg: var(--color-fp-lilac);
+  position: relative;
   margin: 1.5rem 0;
   padding: 0.875rem 1.125rem 0.875rem 3.25rem;
+  border: 1px solid color-mix(in oklab, var(--callout) 22%, transparent);
   border-radius: var(--blume-radius);
-  border: 1px solid color-mix(in srgb, var(--fp-callout) 22%, transparent);
-  background: var(--fp-callout-bg);
-  position: relative;
+  background: var(--callout-bg);
   font-size: 0.9375rem;
-}
 
-.fp-callout::before {
-  content: "";
-  position: absolute;
-  left: 1rem;
-  top: 0.95rem;
-  width: 1.375rem;
-  height: 1.375rem;
-  border-radius: 0.375rem;
-  background-color: var(--fp-callout);
-  -webkit-mask: var(--fp-callout-icon) center / 1rem no-repeat;
-  mask: var(--fp-callout-icon) center / 1rem no-repeat;
-}
+  &::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: 1rem;
+    top: 0.95rem;
+    width: 1.375rem;
+    height: 1.375rem;
+    background-color: var(--callout);
+    mask: var(--callout-icon) center / 1rem no-repeat;
+  }
 
-.fp-callout > :first-child {
-  margin-top: 0;
-}
+  & > :first-child {
+    margin-top: 0;
+  }
 
-.fp-callout > :last-child {
-  margin-bottom: 0;
-}
+  & > :last-child {
+    margin-bottom: 0;
+  }
 
-.prose .fp-callout > p {
-  margin: 0.5rem 0;
-}
+  .prose & > p {
+    margin: 0.5rem 0;
+  }
 
-.prose .fp-callout .fp-callout-title {
-  margin: 0 0 0.25rem;
-  font-weight: 700;
-  color: var(--fp-callout);
-}
+  .prose & .fp-callout-title {
+    margin: 0 0 0.25rem;
+    font-weight: 700;
+    color: var(--callout);
+  }
 
-.fp-callout[data-callout="note"] {
-  --fp-callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M12 16v-4M12 8h.01'/%3E%3C/svg%3E");
-}
+  &[data-callout="note"] {
+    --callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M12 16v-4M12 8h.01'/%3E%3C/svg%3E");
+  }
 
-.fp-callout[data-callout="tip"] {
-  --fp-callout: #5f6e1a;
-  --fp-callout-bg: #f4f8e4;
-  --fp-callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V16h8v-1.3A7 7 0 0 0 12 2Z'/%3E%3C/svg%3E");
-}
+  &[data-callout="tip"] {
+    --callout: var(--color-fp-green-dark);
+    --callout-bg: var(--color-fp-green-wash);
+    --callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V16h8v-1.3A7 7 0 0 0 12 2Z'/%3E%3C/svg%3E");
+  }
 
-.fp-callout[data-callout="important"] {
-  --fp-callout: #6d28d9;
-  --fp-callout-bg: #f5f0ff;
-  --fp-callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2zM12 7v4M12 15h.01'/%3E%3C/svg%3E");
-}
+  &[data-callout="important"] {
+    --callout: var(--color-violet-700);
+    --callout-bg: var(--color-violet-50);
+    --callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2zM12 7v4M12 15h.01'/%3E%3C/svg%3E");
+  }
 
-.fp-callout[data-callout="warning"] {
-  --fp-callout: #9a5b00;
-  --fp-callout-bg: #fff7e6;
-  --fp-callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m21.7 18-8-14a2 2 0 0 0-3.4 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3ZM12 9v4M12 17h.01'/%3E%3C/svg%3E");
-}
+  &[data-callout="warning"] {
+    --callout: var(--color-amber-700);
+    --callout-bg: var(--color-amber-50);
+    --callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m21.7 18-8-14a2 2 0 0 0-3.4 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3ZM12 9v4M12 17h.01'/%3E%3C/svg%3E");
+  }
 
-.fp-callout[data-callout="caution"] {
-  --fp-callout: #c2410c;
-  --fp-callout-bg: #fff1eb;
-  --fp-callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7.9 2h8.2L22 7.9v8.2L16.1 22H7.9L2 16.1V7.9zM12 8v4M12 16h.01'/%3E%3C/svg%3E");
-}
+  &[data-callout="caution"] {
+    --callout: var(--color-orange-700);
+    --callout-bg: var(--color-orange-50);
+    --callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7.9 2h8.2L22 7.9v8.2L16.1 22H7.9L2 16.1V7.9zM12 8v4M12 16h.01'/%3E%3C/svg%3E");
+  }
 
-:root[data-theme="dark"] .fp-callout {
-  --fp-callout-bg: color-mix(in srgb, var(--fp-callout) 14%, #12001f);
-}
+  :root[data-theme="dark"] & {
+    --callout-bg: color-mix(in oklab, var(--callout) 14%, var(--color-fp-void));
 
-:root[data-theme="dark"] .fp-callout[data-callout="note"] {
-  --fp-callout: #c3b2d3;
-}
+    &[data-callout="note"] {
+      --callout: oklch(78.84% 0.0496 308.4);    }
 
-:root[data-theme="dark"] .fp-callout[data-callout="tip"] {
-  --fp-callout: #b3d133;
-}
+    &[data-callout="tip"] {
+      --callout: var(--color-fp-green);
+    }
 
-:root[data-theme="dark"] .fp-callout[data-callout="important"] {
-  --fp-callout: #c4a7ff;
-}
+    &[data-callout="important"] {
+      --callout: var(--color-violet-300);
+    }
 
-:root[data-theme="dark"] .fp-callout[data-callout="warning"] {
-  --fp-callout: #f5b84a;
-}
+    &[data-callout="warning"] {
+      --callout: var(--color-amber-300);
+    }
 
-:root[data-theme="dark"] .fp-callout[data-callout="caution"] {
-  --fp-callout: #ff9a6b;
-}
-
-/* ---------- Translation notice (non-English docs) ---------- */
-
-.fp-translation-notice {
-  display: flex;
-  gap: 0.75rem;
-  align-items: flex-start;
-  margin-bottom: 1.5rem;
-  padding: 0.75rem 1rem;
-  border-radius: var(--blume-radius);
-  background: var(--color-fp-green-wash);
-  border: 1px solid #dfe8b8;
-  color: #3b3a1a;
-  font-size: 0.875rem;
-  line-height: 1.6;
-}
-
-.fp-translation-notice svg {
-  flex: none;
-  margin-top: 0.15rem;
-  color: var(--color-fp-green-dark);
-}
-
-.fp-translation-notice p {
-  margin: 0;
-}
-
-.fp-translation-notice a {
-  color: var(--color-fp-purple);
-  font-weight: 600;
-  text-decoration: underline;
-}
-
-:root[data-theme="dark"] .fp-translation-notice {
-  background: rgb(179 209 51 / 0.08);
-  border-color: rgb(179 209 51 / 0.25);
-  color: var(--blume-foreground);
-}
-
-:root[data-theme="dark"] .fp-translation-notice a {
-  color: var(--color-fp-green);
-}
-
-/* ---------- Custom pages ---------- */
-
-.fp-hero {
-  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 7rem), 0 100%);
-}
-
-.fp-heading {
-  font-family: var(--blume-font-display);
-  font-size: clamp(1.875rem, 3.4vw, 2.75rem);
-  line-height: 1.1;
-  letter-spacing: -0.03em;
-  font-weight: 700;
-  color: var(--fp-heading);
-  text-wrap: balance;
-}
-
-.fp-heading-big {
-  font-size: clamp(2.125rem, 4.4vw, 3.5rem);
-  line-height: 1.05;
-}
-
-.fp-heading-invert {
-  color: #ffffff;
-}
-
-.fp-heading .hl,
-.fp-heading strong {
-  font-weight: inherit;
-  color: var(--color-fp-green-dark);
-}
-
-:root[data-theme="dark"] .fp-heading .hl,
-:root[data-theme="dark"] .fp-heading strong,
-.fp-heading-invert .hl,
-.fp-heading-invert strong {
-  color: var(--color-fp-green);
-}
-
-.fp-rich a {
-  color: var(--fp-link);
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.fp-rich a:hover {
-  text-decoration: underline;
-}
-
-.fp-rich strong {
-  color: inherit;
-  font-weight: 700;
-}
-
-.fp-rich-invert a,
-.fp-rich-invert .hl {
-  color: var(--color-fp-green);
-}
-
-.fp-code-card {
-  background: var(--fp-code-bg);
-}
-
-.fp-code-card .fp-code {
-  margin: 0;
-  padding: 1.25rem 1.5rem;
-  background: transparent !important;
-  font-size: 0.875rem;
-  line-height: 1.75;
-  overflow-x: auto;
-}
-
-.fp-tab {
-  color: rgb(255 255 255 / 0.6);
-  background: transparent;
-  border: 0;
-}
-
-.fp-tab[aria-selected="true"] {
-  color: var(--color-fp-green);
-  background: rgb(255 255 255 / 0.06);
-  box-shadow: inset 0 -2px 0 var(--color-fp-green);
-}
-
-/* ---------- Footer ---------- */
-
-.fp-footer-band {
-  clip-path: polygon(0 4rem, 100% 0, 100% 100%, 0 100%);
-}
-
-.fp-footer a {
-  color: var(--color-fp-green);
-}
-
-.fp-footer .fp-footer-link {
-  color: #ffffff;
-  text-decoration: none;
-}
-
-.fp-footer .fp-footer-link:hover {
-  color: var(--color-fp-green);
+    &[data-callout="caution"] {
+      --callout: var(--color-orange-300);
+    }
+  }
 }

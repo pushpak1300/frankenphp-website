@@ -10,14 +10,15 @@ const { text, label, copied } = Astro.props;
 
 <button
   type="button"
-  class="fp-copy inline-flex size-10 flex-none cursor-pointer items-center justify-center rounded-lg text-white/60 transition-colors hover:bg-white/10 hover:text-white"
+  class="group inline-flex size-10 flex-none cursor-pointer items-center justify-center rounded-lg text-white/60 transition-colors hover:bg-white/10 hover:text-white data-done:text-fp-green"
   data-fp-copy={text}
-  data-copied={copied}
+  data-label={label}
+  data-copied-label={copied}
   aria-label={label}
   title={label}
 >
-  <svg class="fp-copy-idle" aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg>
-  <svg class="fp-copy-done hidden" aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"></path></svg>
+  <svg class="group-data-done:hidden" aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"></rect><path d="M5 15V5a2 2 0 0 1 2-2h10"></path></svg>
+  <svg class="hidden group-data-done:block" aria-hidden="true" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 7"></path></svg>
 </button>
 
 <script>
@@ -29,14 +30,11 @@ const { text, label, copied } = Astro.props;
     } catch {
       return;
     }
-    const label = button.getAttribute("aria-label") ?? "";
-    button.setAttribute("aria-label", button.dataset.copied ?? label);
-    button.querySelector(".fp-copy-idle")?.classList.add("hidden");
-    button.querySelector(".fp-copy-done")?.classList.remove("hidden");
+    button.dataset.done = "";
+    button.setAttribute("aria-label", button.dataset.copiedLabel ?? "");
     setTimeout(() => {
-      button.setAttribute("aria-label", label);
-      button.querySelector(".fp-copy-idle")?.classList.remove("hidden");
-      button.querySelector(".fp-copy-done")?.classList.add("hidden");
+      delete button.dataset.done;
+      button.setAttribute("aria-label", button.dataset.label ?? "");
     }, 1600);
   });
 </script>

@@ -1,7 +1,4 @@
 #!/usr/bin/env node
-// Runs after `blume build`. Blume writes hreflang alternates for docs pages,
-// but not for custom .astro pages; this adds them to the localized homepage
-// and help page so search engines link each language version to the others.
 
 import fs from "node:fs";
 import path from "node:path";
