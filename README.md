@@ -82,13 +82,8 @@ Set `FRANKENPHP_REPO=/path/to/frankenphp` to import from a local checkout instea
 
 ## Deployment
 
-`bun run build` writes the static site to `dist/`, ready for any static host.
-Before building for production, download the installers from php/frankenphp so that `https://frankenphp.dev/install.sh` serves the latest version:
-
-```console
-curl -fsSL https://raw.githubusercontent.com/php/frankenphp/main/install.sh -o public/install.sh
-curl -fsSL https://raw.githubusercontent.com/php/frankenphp/main/install.ps1 -o public/install.ps1
-```
+`bun run build` (or `npm run build`, `pnpm run build`) writes the static site to `dist/`, ready for any static host.
+The build first downloads `install.sh` and `install.ps1` from php/frankenphp, so `https://frankenphp.dev/install.sh` always serves the latest installer.
 
 ## SEO and AI agents
 
