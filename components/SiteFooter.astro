@@ -1,4 +1,5 @@
 ---
+import NavProgress from "./NavProgress.astro";
 import { localeOfRoute, localizePath, stringsFor } from "./i18n";
 
 interface Props {
@@ -30,6 +31,7 @@ const columns = [
 ];
 ---
 
+<NavProgress />
 <footer class="mt-32 border-t border-border">
   <div class="mx-auto flex max-w-[75rem] flex-wrap justify-between gap-10 px-6 pt-14 pb-12">
     <div class="flex max-w-[460px] flex-[1_1_340px] flex-col gap-[18px]">
