@@ -5,13 +5,13 @@ The site is built with [Blume](https://useblume.dev), a Markdown-first documenta
 
 ## Getting started
 
-You need Node.js 22.12 or newer and [Bun](https://bun.sh).
+You need Node.js 22.12 or newer and npm.
 
 ```console
 git clone git@github.com:dunglas/frankenphp-website.git
 cd frankenphp-website
-bun install
-bun run dev
+npm install
+npm run dev
 ```
 
 The site is served at http://localhost:4321 with hot reload.
@@ -19,11 +19,11 @@ The site is served at http://localhost:4321 with hot reload.
 To build the production site in `dist/` and preview it:
 
 ```console
-bun run build
-bun run preview
+npm run build
+npm run preview
 ```
 
-`bun run doctor` checks the configuration and the content, and `bunx blume validate` checks every internal link.
+`npm run doctor` checks the configuration and the content, and `npx blume validate` checks every internal link.
 
 ## Project structure
 
@@ -75,14 +75,14 @@ The documentation used to be copied from [php/frankenphp](https://github.com/php
 It now lives in this repository. To replace `content/` with a fresh copy converted from upstream, run:
 
 ```console
-bun run import-docs --force
+npm run import-docs -- --force
 ```
 
 Set `FRANKENPHP_REPO=/path/to/frankenphp` to import from a local checkout instead of cloning, and `GITHUB_KEY` to clone with a token.
 
 ## Deployment
 
-`bun run build` (or `npm run build`, `pnpm run build`) writes the static site to `dist/`, ready for any static host.
+`npm run build` writes the static site to `dist/`, ready for any static host.
 The build first downloads `install.sh` and `install.ps1` from php/frankenphp, so `https://frankenphp.dev/install.sh` always serves the latest installer.
 
 ## SEO and AI agents
