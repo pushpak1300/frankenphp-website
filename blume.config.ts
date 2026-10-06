@@ -69,15 +69,15 @@ export default defineConfig({
   },
 
   theme: {
-    accent: { light: "#16111e", dark: "#b3d133" },
+    accent: { light: "#390075", dark: "#b3d133" },
     action: "#b3d133",
-    background: { light: "#ffffff", dark: "#0d0a12" },
-    radius: "md",
-    mode: "dark",
+    background: { light: "#ffffff", dark: "#12021f" },
+    radius: "lg",
+    mode: "light",
     fonts: {
-      display: "inter",
-      body: "inter",
-      mono: "ibm-plex-mono",
+      display: { name: "Bricolage Grotesque", weights: ["500..800"] },
+      body: { name: "Instrument Sans", weights: ["400..700"] },
+      mono: { name: "Martian Mono", weights: ["400..600"] },
     },
   },
 
@@ -95,7 +95,7 @@ export default defineConfig({
   seo: {
     metatags: {
       "go-import": `frankenphp.dev git ${REPO}`,
-      "theme-color": "#0d0a12",
+      "theme-color": "#1a0330",
     },
     organization: {
       name: "FrankenPHP",

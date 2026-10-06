@@ -1,8 +1,7 @@
 type CodeThemes = { light: object; dark: object };
 
-// Shiki themes matching the site palette: a violet-tinted ink, violet keywords
-// and lime strings, so code reads as part of the page rather than a pasted-in
-// editor theme. Shared by Markdown code fences and the homepage code panels.
+// The Shiki theme for every code block, Markdown fences and homepage panels
+// alike, drawn from the mascot's palette.
 
 const palette = (p: {
   name: string;
@@ -45,27 +44,18 @@ const palette = (p: {
   ],
 });
 
-export const codeThemes: CodeThemes = {
-  light: palette({
-    name: "frankenphp-light",
-    type: "light",
-    bg: "#f8f6fb",
-    fg: "#2a2433",
-    comment: "#6c657a",
-    keyword: "#6d28d9",
-    string: "#4f6b12",
-    number: "#4f6b12",
-    fn: "#16111e",
-  }),
-  dark: palette({
-    name: "frankenphp-dark",
-    type: "dark",
-    bg: "#120e19",
-    fg: "#e6e2ee",
-    comment: "#8e869c",
-    keyword: "#c4b5fd",
-    string: "#d4e88a",
-    number: "#d4e88a",
-    fn: "#faf8fd",
-  }),
-};
+// Code is always set on the night-purple ground of the illustrations, in light
+// and dark mode alike: lilac keywords, lime strings, soft violet comments.
+const night = palette({
+  name: "frankenphp-night",
+  type: "dark",
+  bg: "#1a0330",
+  fg: "#f4eefb",
+  comment: "#9c86b5",
+  keyword: "#c3b2d3",
+  string: "#b3d133",
+  number: "#b3d133",
+  fn: "#ffffff",
+});
+
+export const codeThemes: CodeThemes = { light: night, dark: night };

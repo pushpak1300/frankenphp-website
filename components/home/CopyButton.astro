@@ -3,14 +3,20 @@ interface Props {
   text: string;
   label: string;
   copied: string;
+  tone?: "light" | "night";
 }
 
-const { text, label, copied } = Astro.props;
+const { text, label, copied, tone = "light" } = Astro.props;
 ---
 
 <button
   type="button"
-  class="group inline-flex size-9 flex-none cursor-pointer items-center justify-center rounded-full border-0 bg-transparent text-muted-foreground transition-colors hover:bg-surface-soft hover:text-heading data-done:text-accent-ink"
+  class:list={[
+    "group inline-flex size-10 flex-none cursor-pointer items-center justify-center rounded-[10px] border-0 transition-colors",
+    tone === "light"
+      ? "bg-fp-paper text-fp-purple hover:bg-fp-lilac data-done:bg-fp-green data-done:text-fp-night"
+      : "bg-white/10 text-fp-mist hover:bg-white/20 hover:text-white data-done:text-fp-green",
+  ]}
   data-fp-copy={text}
   data-label={label}
   data-copied-label={copied}

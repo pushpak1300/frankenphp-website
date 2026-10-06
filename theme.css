@@ -1,132 +1,265 @@
+/*
+ * FrankenPHP, "It's alive!"
+ *
+ * The interface borrows the illustrations' own language: thick purple
+ * outlines, flat lime fills and hard offset shadows, so the mascot lives in
+ * the page instead of being pasted onto it. Motifs come from the mascot too:
+ * head stitches become seams, neck bolts become bullets.
+ */
+
 @theme {
-  --color-fp-night: #16111e;
-  --color-fp-void: #0d0a12;
+  --color-fp-night: #1a0330;
+  --color-fp-deep: #0f0120;
+  --color-fp-purple: #390075;
   --color-fp-green: #b3d133;
   --color-fp-lime: #c6e85a;
-  --color-fp-green-dark: #5a7a0f;
-  --color-fp-mist: #f8f6fb;
-  --text-eyebrow: 0.75rem;
-  --text-eyebrow--line-height: 1rem;
+  --color-fp-lilac: #c3b2d3;
+  --color-fp-paper: #f4effa;
+  --color-fp-olive: #6b860c;
+  --color-fp-mist: #d9cce8;
 }
 
-/* Light mode. Every neutral carries a faint violet cast, a nod to the old brand purple. */
 :root {
   --blume-background: #ffffff;
-  --blume-foreground: #1f1a29;
-  --blume-muted: #f4f1f8;
-  --blume-muted-foreground: #5d566b;
-  --blume-border: rgba(45, 25, 90, 0.09);
-  --blume-code-background: #f8f6fb;
-  --blume-content-width: 47.5rem;
+  --blume-foreground: #2b1b3f;
+  --blume-muted: #f4effa;
+  --blume-muted-foreground: #5e4b75;
+  --blume-border: #e3d9ee;
+  --blume-code-background: #1a0330;
+  --blume-content-width: 50rem;
 
-  --fp-heading: #16111e;
-  --fp-heading-muted: #958ea3;
-  --fp-body: #3b3447;
-  --fp-dim: #6c657a;
-  --fp-code-surface: #f8f6fb;
-  --fp-code-foreground: #2a2433;
-  --fp-accent-ink: #5a7a0f;
-  --fp-surface-soft: rgba(110, 70, 200, 0.04);
-  --fp-surface-tint: rgba(110, 70, 200, 0.03);
-  --fp-grid-dot: rgba(45, 25, 90, 0.12);
-  --fp-haze: rgba(124, 77, 214, 0.09);
-  --fp-glow: rgba(179, 209, 51, 0.18);
-  --fp-underline: rgba(31, 26, 41, 0.35);
-  --fp-line: rgba(45, 25, 90, 0.11);
-  --fp-line-strong: rgba(45, 25, 90, 0.15);
-  --fp-dash: rgba(31, 26, 41, 0.25);
-  --fp-invert: #16111e;
-  --fp-invert-foreground: #ffffff;
+  --fp-bg: #ffffff;
+  --fp-paper: #f4effa;
+  --fp-card: #ffffff;
+  --fp-text: #2b1b3f;
+  --fp-muted: #4a3a5e;
+  --fp-soft: #6a4f8c;
+  --fp-heading: #390075;
+  --fp-line: #390075;
+  --fp-shadow: #390075;
+  --fp-hl: #6b860c;
+  --fp-tip: #eef5cf;
+  --fp-grid: rgba(57, 0, 117, 0.06);
 }
 
 :root[data-theme="dark"] {
-  --blume-background: #0d0a12;
-  --blume-foreground: #eeebf3;
-  --blume-muted: rgba(190, 160, 255, 0.06);
-  --blume-muted-foreground: #a59eb3;
-  --blume-border: rgba(220, 205, 255, 0.09);
-  --blume-code-background: #120e19;
+  --blume-background: #12021f;
+  --blume-foreground: #e9e1f3;
+  --blume-muted: #1f0838;
+  --blume-muted-foreground: #c9bbda;
+  --blume-border: rgba(195, 178, 211, 0.2);
 
-  --fp-heading: #faf8fd;
-  --fp-heading-muted: #726a82;
-  --fp-body: #d7d2e0;
-  --fp-dim: #8e869c;
-  --fp-code-surface: #120e19;
-  --fp-code-foreground: #e6e2ee;
-  --fp-accent-ink: #b3d133;
-  --fp-surface-soft: rgba(190, 160, 255, 0.04);
-  --fp-surface-tint: rgba(190, 160, 255, 0.03);
-  --fp-grid-dot: rgba(220, 205, 255, 0.12);
-  --fp-haze: rgba(124, 77, 214, 0.16);
-  --fp-glow: rgba(179, 209, 51, 0.18);
-  --fp-underline: rgba(255, 255, 255, 0.35);
-  --fp-line: rgba(220, 205, 255, 0.11);
-  --fp-line-strong: rgba(220, 205, 255, 0.15);
-  --fp-dash: rgba(255, 255, 255, 0.25);
-  --fp-invert: #faf8fd;
-  --fp-invert-foreground: #141414;
+  --fp-bg: #12021f;
+  --fp-paper: #1a0330;
+  --fp-card: #1f0838;
+  --fp-text: #e9e1f3;
+  --fp-muted: #c9bbda;
+  --fp-soft: #b6a6ca;
+  --fp-heading: #ffffff;
+  --fp-line: #c3b2d3;
+  --fp-shadow: #b3d133;
+  --fp-hl: #b3d133;
+  --fp-tip: rgba(179, 209, 51, 0.1);
+  --fp-grid: rgba(195, 178, 211, 0.07);
 }
 
 @theme inline {
+  --color-paper: var(--fp-paper);
+  --color-card: var(--fp-card);
+  --color-ink: var(--fp-text);
+  --color-ink-muted: var(--fp-muted);
+  --color-ink-soft: var(--fp-soft);
   --color-heading: var(--fp-heading);
-  --color-heading-muted: var(--fp-heading-muted);
-  --color-body: var(--fp-body);
-  --color-dim: var(--fp-dim);
-  --color-code-surface: var(--fp-code-surface);
-  --color-code-foreground: var(--fp-code-foreground);
-  --color-accent-ink: var(--fp-accent-ink);
-  --color-surface-soft: var(--fp-surface-soft);
-  --color-surface-tint: var(--fp-surface-tint);
   --color-line: var(--fp-line);
-  --color-line-strong: var(--fp-line-strong);
-  --color-dash: var(--fp-dash);
-  --color-invert: var(--fp-invert);
-  --color-invert-foreground: var(--fp-invert-foreground);
+  --color-hl: var(--fp-hl);
 }
 
-/* Body-text links: same colour as the text, underlined, never bold. */
+/* Hard offset shadows, as in the line art. */
+@utility shadow-hard-sm {
+  box-shadow: 4px 4px 0 var(--fp-shadow);
+}
+
+@utility shadow-hard {
+  box-shadow: 6px 6px 0 var(--fp-shadow);
+}
+
+@utility shadow-hard-lg {
+  box-shadow: 10px 10px 0 var(--fp-shadow);
+}
+
+/* Lab graph paper. */
+@utility bg-lab {
+  background-image: linear-gradient(var(--fp-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--fp-grid) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+@utility bg-lab-night {
+  background-color: #1a0330;
+  background-image: linear-gradient(rgba(195, 178, 211, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(195, 178, 211, 0.07) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* The mascot's head stitches, as a seam. */
+@utility stitches {
+  height: 16px;
+  background:
+    linear-gradient(var(--stitch, #b3d133), var(--stitch, #b3d133)) center / 100% 3px no-repeat,
+    repeating-linear-gradient(90deg, var(--stitch, #b3d133) 0 4px, transparent 4px 28px) center / 100% 16px no-repeat;
+}
+
+/* A neck bolt, used as a bullet. */
+@utility bolt {
+  flex: none;
+  width: 22px;
+  height: 13px;
+  border-radius: 3px;
+  background: #c3b2d3;
+  border: 2.5px solid var(--fp-line);
+}
+
+/* Highlighted words in headings: olive on light ground, lime on night. */
+@utility hl-ink {
+  & :is(strong, .hl) {
+    color: var(--fp-hl);
+    font-weight: inherit;
+  }
+}
+
+@utility hl-night {
+  & :is(strong, .hl) {
+    color: #b3d133;
+    font-weight: inherit;
+  }
+}
+
+@utility hl-sticker {
+  & :is(strong, .hl) {
+    display: inline-block;
+    padding: 0 0.22em 0.12em;
+    border-radius: 0.2em;
+    background: #1a0330;
+    color: #b3d133;
+    font-weight: inherit;
+    rotate: -2deg;
+  }
+}
+
+@utility hl-swash {
+  & :is(strong, .hl) {
+    color: inherit;
+    font-weight: inherit;
+    background: linear-gradient(transparent 55%, #b3d133 55%, #b3d133 92%, transparent 92%);
+  }
+}
+
+/* Links in running text keep the text colour, underlined in lime. */
 @utility rich-text {
   & a {
     color: inherit;
     font-weight: inherit;
     text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-decoration-color: var(--fp-underline);
-    text-underline-offset: 3px;
-    transition: text-decoration-color 0.15s ease;
+    text-decoration-color: #b3d133;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 4px;
   }
 
   & a:hover {
     text-decoration-color: currentColor;
   }
 
+  & strong {
+    font-weight: 700;
+  }
+
   & code {
     font-family: var(--font-mono);
-    font-size: 0.9em;
+    font-size: 0.82em;
   }
 }
 
-@utility bg-dots {
-  background-image: radial-gradient(var(--fp-grid-dot) 1px, transparent 1px);
-  background-size: 22px 22px;
+/* Motion: the creature breathes, the lightning flickers, the tapes run. */
+@keyframes fp-float {
+  0%, 100% { transform: translateY(0) rotate(-1.5deg); }
+  50% { transform: translateY(-16px) rotate(1deg); }
 }
 
-@utility code-ink {
-  & pre.astro-code {
-    background: transparent !important;
-    color: var(--shiki-light, var(--fp-code-foreground)) !important;
-  }
+@keyframes fp-flicker {
+  0%, 40%, 100% { opacity: 1; }
+  42% { opacity: 0.1; }
+  44% { opacity: 1; }
+  46% { opacity: 0.25; }
+  48%, 76% { opacity: 1; }
+  78% { opacity: 0.15; }
+  80% { opacity: 1; }
+}
 
-  & pre.astro-code span {
-    color: var(--shiki-light, inherit);
-  }
+@keyframes fp-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
 
-  :root[data-theme="dark"] & pre.astro-code {
-    color: var(--shiki-dark, var(--fp-code-foreground)) !important;
-  }
+@keyframes fp-blob {
+  0%, 100% { border-radius: 58% 42% 55% 45% / 48% 60% 40% 52%; }
+  33% { border-radius: 40% 60% 38% 62% / 60% 38% 62% 40%; }
+  66% { border-radius: 62% 38% 48% 52% / 38% 52% 48% 62%; }
+}
 
-  :root[data-theme="dark"] & pre.astro-code span {
-    color: var(--shiki-dark, inherit);
+@keyframes fp-glow {
+  0%, 100% { opacity: 0.55; scale: 1; }
+  50% { opacity: 0.95; scale: 1.08; }
+}
+
+@keyframes fp-req {
+  0% { left: 0; opacity: 0; }
+  12% { opacity: 1; }
+  88% { opacity: 1; }
+  100% { left: calc(100% - 12px); opacity: 0; }
+}
+
+@keyframes fp-pulse {
+  0%, 100% { box-shadow: 6px 6px 0 #1a0330, 0 0 0 0 rgba(26, 3, 48, 0.35); }
+  50% { box-shadow: 6px 6px 0 #1a0330, 0 0 0 12px rgba(26, 3, 48, 0); }
+}
+
+@keyframes fp-wiggle {
+  0%, 100% { rotate: 6deg; }
+  50% { rotate: -3deg; scale: 1.05; }
+}
+
+.fp-float { animation: fp-float 5s ease-in-out infinite; }
+.fp-flicker { animation: fp-flicker 3.2s linear infinite; }
+.fp-marquee { animation: fp-marquee 48s linear infinite; }
+.fp-marquee-r { animation: fp-marquee 60s linear infinite reverse; }
+.fp-blob { animation: fp-blob 11s ease-in-out infinite; }
+.fp-glow { animation: fp-glow 4s ease-in-out infinite; }
+.fp-req { animation: fp-req 2.4s linear infinite; }
+.fp-pulse { animation: fp-pulse 2.4s ease-in-out infinite; }
+.fp-wiggle { animation: fp-wiggle 2.4s ease-in-out infinite; }
+
+.fp-lift {
+  transition: translate 0.2s ease, rotate 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fp-lift:hover {
+  translate: -4px -4px;
+  rotate: 0deg;
+  box-shadow: 10px 10px 0 var(--fp-shadow);
+}
+
+.fp-press {
+  transition: translate 0.15s ease;
+}
+
+.fp-press:hover {
+  translate: -2px -2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
   }
 }
 
@@ -134,19 +267,25 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Highlighted words in a heading take the muted second tone, never bold. */
-:where(h1, h2, h3) :is(strong.hl, .hl) {
-  color: var(--fp-heading-muted);
-  font-weight: inherit;
-}
-
-/* Header: a hairline instead of a shadow, wordmark at the design's size. */
+/* Header: always night purple, whatever the colour mode. */
 [data-blume-header] {
-  border-bottom: 1px solid var(--blume-border);
+  --blume-background: #1a0330;
+  --blume-foreground: #f4eefb;
+  --blume-muted-foreground: #d9cce8;
+  --blume-muted: rgba(195, 178, 211, 0.16);
+  --blume-border: rgba(195, 178, 211, 0.3);
+  background: #1a0330 !important;
+  border-bottom: 3px solid #0f0120;
+  color-scheme: dark;
 }
 
-header img[alt="FrankenPHP"] {
-  height: 1.25rem;
+[data-blume-header] img[src$="logo_lightbg.svg"] {
+  display: none !important;
+}
+
+[data-blume-header] img[src$="logo_darkbg.svg"] {
+  display: block !important;
+  height: 1.5rem;
 }
 
 /* Navigation progress bar (see NavProgress.astro). */
@@ -154,7 +293,7 @@ header img[alt="FrankenPHP"] {
   position: fixed;
   inset: 0 0 auto;
   z-index: 100;
-  height: 2px;
+  height: 3px;
   background: var(--color-fp-green);
   box-shadow: 0 0 10px var(--color-fp-green);
   transform: scaleX(0);
@@ -163,7 +302,6 @@ header img[alt="FrankenPHP"] {
   pointer-events: none;
 }
 
-/* While the next page loads, the current one dims so the wait reads as progress. */
 main {
   transition: opacity 0.2s ease;
 }
@@ -172,89 +310,156 @@ main {
   opacity: 0.55;
 }
 
-/* Docs sidebar: mono section labels and a lime marker on the current page. */
+/* Docs sidebar: chunky section titles, the current page as a lime sticker. */
 .blume-nav-heading {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--fp-dim);
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 800;
+  color: var(--fp-heading);
+}
+
+.blume-nav-link {
+  border-radius: 10px;
 }
 
 .blume-nav-link[aria-current="page"] {
-  box-shadow: inset 2px 0 0 var(--fp-accent-ink);
-  font-weight: 500;
+  background: #b3d133 !important;
+  color: #1a0330 !important;
+  font-weight: 700;
+  border: 2.5px solid var(--fp-line);
+  box-shadow: 3px 3px 0 var(--fp-shadow);
 }
 
-/* "On this page": a hairline rail, the current section marked in lime. */
+/* "On this page": a neck bolt marks the current section. */
 [data-blume-toc] > p:first-child {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--fp-dim);
-}
-
-[data-blume-toc] blume-toc > ul {
-  border-inline-start: 1px solid var(--blume-border);
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 800;
+  color: var(--fp-heading);
 }
 
 [data-blume-toc] blume-toc a {
-  margin-inline-start: -1px;
-  padding-inline-start: 0.875rem;
-  border-inline-start: 1px solid transparent;
-  font-size: 0.8125rem;
+  position: relative;
+  padding-inline-start: 1.75rem;
+}
+
+[data-blume-toc] blume-toc a::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.62rem;
+  width: 16px;
+  height: 10px;
+  border-radius: 3px;
+  border: 2px solid #c3b2d3;
 }
 
 [data-blume-toc] blume-toc a[aria-current="location"] {
-  border-inline-start-color: var(--fp-accent-ink);
+  font-weight: 700;
 }
 
-main h1:not([class]) {
-  color: var(--color-heading);
-  font-weight: 600;
-  letter-spacing: -0.04em;
+[data-blume-toc] blume-toc a[aria-current="location"]::before {
+  background: #b3d133;
+  border: 2.5px solid var(--fp-line);
 }
 
+/* Docs article. */
 .prose {
-  font-size: 1rem;
+  font-size: 1.0625rem;
   line-height: 1.75;
-  color: var(--fp-body);
-  --tw-prose-headings: var(--color-heading);
-  --tw-prose-bold: var(--color-heading);
+  color: var(--fp-text);
+  --tw-prose-headings: var(--fp-heading);
+  --tw-prose-bold: var(--fp-heading);
 }
 
 .prose :where(h1, h2, h3, h4) {
-  color: var(--color-heading);
-  font-weight: 600;
+  font-family: var(--font-display);
+  color: var(--fp-heading);
+  font-weight: 800;
 }
 
-.prose :where(h1) {
-  letter-spacing: -0.04em;
+/* The page title and its lead read as one lilac card, mascot on the right. */
+.prose {
+  position: relative;
 }
 
-.prose :where(h2):not(:where(.not-prose *)) {
-  margin-top: 3rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--blume-border);
-  font-size: 1.625rem;
-  line-height: 1.25;
+.prose > h1:first-child {
+  margin: 0;
+  padding: 2.125rem 2.25rem 0.5rem;
+  border: 3px solid var(--fp-line);
+  border-bottom: 0;
+  border-radius: 24px 24px 0 0;
+  background: var(--fp-paper);
+  box-shadow: 7px 7px 0 var(--fp-shadow);
+  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+  line-height: 1.02;
   letter-spacing: -0.03em;
 }
 
-.prose :where(h3):not(:where(.not-prose *)) {
+.prose > h1:first-child + p.text-lg {
+  margin: 0 0 2rem;
+  padding: 0.5rem 2.25rem 2rem;
+  border: 3px solid var(--fp-line);
+  border-top: 0;
+  border-radius: 0 0 24px 24px;
+  background: var(--fp-paper);
+  box-shadow: 7px 7px 0 var(--fp-shadow);
+  color: var(--fp-muted);
+  font-size: 1.1875rem;
+  line-height: 1.55;
+}
+
+.prose > h1:first-child:not(:has(+ p.text-lg)) {
+  margin-bottom: 2rem;
+  padding-bottom: 2.125rem;
+  border-bottom: 3px solid var(--fp-line);
+  border-radius: 24px;
+}
+
+@media (min-width: 52rem) {
+  .prose > h1:first-child,
+  .prose > h1:first-child + p.text-lg {
+    padding-inline-end: 13rem;
+  }
+
+  article.prose:has(> h1:first-child)::before {
+    content: "";
+    position: absolute;
+    top: 1rem;
+    inset-inline-end: 1.75rem;
+    z-index: 1;
+    width: 10rem;
+    height: 10rem;
+    background: url("/img/elephant_cover.svg") center / contain no-repeat;
+    pointer-events: none;
+    animation: fp-float 6s ease-in-out infinite;
+  }
+}
+
+/* Section headings sit under a stitched seam. */
+.prose :where(h2):not(:where(.not-prose *)) {
+  margin-top: 3.5rem;
+  padding-top: 2.25rem;
+  font-size: 2rem;
+  line-height: 1.15;
   letter-spacing: -0.02em;
+  background:
+    linear-gradient(#b3d133, #b3d133) top 6px left / 100% 3px no-repeat,
+    repeating-linear-gradient(90deg, #b3d133 0 4px, transparent 4px 28px) top left / 100% 16px no-repeat;
+}
+
+.prose :where(h3):not(:where(.not-prose *)) {
+  font-size: 1.375rem;
+  letter-spacing: -0.01em;
 }
 
 .prose :where(a):not(:where(.not-prose *, [data-blume-card], h1 *, h2 *, h3 *, h4 *)) {
   color: inherit;
   font-weight: inherit;
   text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-decoration-color: var(--fp-underline);
-  text-underline-offset: 3px;
+  text-decoration-color: #b3d133;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 4px;
   transition: text-decoration-color 0.15s ease;
 
   &:hover {
@@ -263,75 +468,104 @@ main h1:not([class]) {
 }
 
 .prose :not(pre) > code:not(:where([class~="not-prose"] *)) {
-  color: var(--color-heading);
-  background: var(--fp-surface-soft);
-  border: 1px solid var(--blume-border);
-  padding: 0.0625rem 0.375rem;
-  border-radius: 0.375rem;
-  font-size: 0.86em;
-  font-weight: 400;
+  padding: 0.125rem 0.4375rem;
+  border: 1.5px solid #c3b2d3;
+  border-radius: 7px;
+  background: var(--fp-paper);
+  color: var(--fp-heading);
+  font-size: 0.8em;
+  font-weight: 500;
 }
 
-/* Blume's own code-block rules are !important, so these overrides must be too. */
+/* Code: night purple, a thick outline and a lime hard shadow. Blume's own
+   code-block rules are !important, so these overrides must be too. */
 .prose pre.astro-code,
 .prose blume-tabs pre,
 .prose .not-prose > div > pre {
-  background: var(--color-code-surface) !important;
-  border-color: var(--blume-border);
-  border-radius: 0.75rem;
+  background: #1a0330 !important;
+  color: #f4eefb !important;
+}
+
+.prose pre.astro-code,
+.prose .not-prose > div > pre {
+  border: 3px solid #0f0120 !important;
+  border-radius: 16px !important;
+  box-shadow: 6px 6px 0 #b3d133;
 }
 
 .prose blume-tabs {
-  background: var(--color-code-surface);
-  border-color: var(--blume-border);
-  border-radius: 0.75rem;
+  border: 3px solid #0f0120;
+  border-radius: 16px;
+  background: #1a0330;
+  box-shadow: 6px 6px 0 #b3d133;
+
+  & pre.astro-code {
+    border: 0 !important;
+    box-shadow: none;
+  }
 
   & [role="tab"] {
-    color: var(--fp-dim);
-    font-family: var(--font-mono);
+    color: #c9bbda;
+    font-weight: 600;
   }
 
   & [role="tab"][aria-selected="true"] {
-    color: var(--color-heading);
+    color: #1a0330;
+    background: #b3d133;
+    border-radius: 8px;
   }
 }
 
 .prose :where(pre[data-language])::before {
-  color: var(--fp-dim);
-  border-bottom-color: var(--blume-border);
+  color: #c9bbda;
+  border-bottom-color: rgba(195, 178, 211, 0.2);
 }
 
 .prose :is(pre > [data-blume-copy], pre > [data-blume-ask], blume-tabs [data-blume-copy]) {
-  background: transparent !important;
+  background: rgba(195, 178, 211, 0.16) !important;
   border-color: transparent !important;
-  color: var(--fp-dim) !important;
+  color: #c9bbda !important;
 
   &:hover {
-    background: var(--fp-surface-soft) !important;
-    color: var(--color-heading) !important;
+    background: rgba(195, 178, 211, 0.28) !important;
+    color: #ffffff !important;
   }
 }
 
+/* Callouts: outlined stickers with a round badge. */
 .fp-callout {
-  --callout: var(--fp-dim);
-  --callout-bg: var(--fp-surface-tint);
+  --callout: var(--fp-line);
+  --callout-bg: var(--fp-paper);
+  --callout-badge: #390075;
+  --callout-icon-color: #b3d133;
   position: relative;
-  margin: 1.5rem 0;
-  padding: 0.875rem 1.125rem 0.875rem 3.25rem;
-  border: 1px solid color-mix(in oklab, var(--callout) 22%, transparent);
-  border-radius: 0.75rem;
+  margin: 1.75rem 0;
+  padding: 1.125rem 1.375rem 1.125rem 4.25rem;
+  border: 3px solid var(--fp-line);
+  border-radius: 18px;
   background: var(--callout-bg);
-  font-size: 0.9375rem;
+  font-size: 1rem;
 
   &::before {
     content: "";
     position: absolute;
-    inset-inline-start: 1rem;
-    top: 0.95rem;
-    width: 1.375rem;
-    height: 1.375rem;
-    background-color: var(--callout);
-    mask: var(--callout-icon) center / 1rem no-repeat;
+    inset-inline-start: 1.125rem;
+    top: 1.125rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 50%;
+    background: var(--callout-badge);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset-inline-start: 1.125rem;
+    top: 1.125rem;
+    width: 2.25rem;
+    height: 2.25rem;
+    background-color: var(--callout-icon-color);
+    mask: var(--callout-icon) center / 1.125rem no-repeat;
   }
 
   & > :first-child {
@@ -343,63 +577,62 @@ main h1:not([class]) {
   }
 
   .prose & > p {
-    margin: 0.5rem 0;
+    margin: 0.375rem 0;
   }
 
   .prose & .fp-callout-title {
     margin: 0 0 0.25rem;
-    font-weight: 700;
-    color: var(--callout);
+    font-family: var(--font-display);
+    font-size: 1.1875rem;
+    font-weight: 800;
+    color: var(--fp-heading);
+  }
+
+  & a {
+    text-decoration-color: currentColor !important;
   }
 
   &[data-callout="note"] {
-    --callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M12 16v-4M12 8h.01'/%3E%3C/svg%3E");
+    --callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cpath d='M12 16v-4M12 8h.01'/%3E%3C/svg%3E");
   }
 
   &[data-callout="tip"] {
-    --callout: var(--color-fp-green-dark);
-    --callout-bg: rgba(150, 190, 40, 0.09);
-    --callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7V16h8v-1.3A7 7 0 0 0 12 2Z'/%3E%3C/svg%3E");
+    --callout-bg: var(--fp-tip);
+    --callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpath d='M13 2 4 14h7l-1 8 9-12h-7z'/%3E%3C/svg%3E");
   }
 
   &[data-callout="important"] {
-    --callout: var(--color-violet-700);
-    --callout-bg: var(--color-violet-50);
-    --callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2zM12 7v4M12 15h.01'/%3E%3C/svg%3E");
+    --callout-badge: #b3d133;
+    --callout-icon-color: #1a0330;
+    --callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 8v5M12 17h.01'/%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3C/svg%3E");
   }
 
   &[data-callout="warning"] {
-    --callout: var(--color-amber-700);
-    --callout-bg: var(--color-amber-50);
-    --callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m21.7 18-8-14a2 2 0 0 0-3.4 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3ZM12 9v4M12 17h.01'/%3E%3C/svg%3E");
+    --callout-bg: #fff4d6;
+    --callout-badge: #8a5a00;
+    --callout-icon-color: #ffe08a;
+    --callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m21.7 18-8-14a2 2 0 0 0-3.4 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3ZM12 9v4M12 17h.01'/%3E%3C/svg%3E");
   }
 
   &[data-callout="caution"] {
-    --callout: var(--color-orange-700);
-    --callout-bg: var(--color-orange-50);
-    --callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7.9 2h8.2L22 7.9v8.2L16.1 22H7.9L2 16.1V7.9zM12 8v4M12 16h.01'/%3E%3C/svg%3E");
+    --callout-bg: #ffe7e0;
+    --callout-badge: #a1260b;
+    --callout-icon-color: #ffd2c4;
+    --callout-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7.9 2h8.2L22 7.9v8.2L16.1 22H7.9L2 16.1V7.9zM12 8v4M12 16h.01'/%3E%3C/svg%3E");
   }
 
   :root[data-theme="dark"] & {
-    --callout-bg: color-mix(in oklab, var(--callout) 6%, var(--color-fp-void));
-
     &[data-callout="note"] {
-      --callout: oklch(78.84% 0.0496 308.4);    }
-
-    &[data-callout="tip"] {
-      --callout: var(--color-fp-green);
-    }
-
-    &[data-callout="important"] {
-      --callout: var(--color-violet-300);
+      --callout-badge: #c3b2d3;
+      --callout-icon-color: #1a0330;
     }
 
     &[data-callout="warning"] {
-      --callout: var(--color-amber-300);
+      --callout-bg: rgba(255, 196, 0, 0.1);
     }
 
     &[data-callout="caution"] {
-      --callout: var(--color-orange-300);
+      --callout-bg: rgba(255, 90, 50, 0.12);
     }
   }
 }

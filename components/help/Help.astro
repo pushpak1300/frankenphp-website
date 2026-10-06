@@ -1,8 +1,6 @@
 ---
 import CustomPage from "../CustomPage.astro";
 import Button from "../ui/Button.astro";
-import Card from "../ui/Card.astro";
-import Eyebrow from "../ui/Eyebrow.astro";
 import Heading from "../ui/Heading.astro";
 import { stringsFor } from "../i18n";
 
@@ -24,56 +22,63 @@ const description = help.hero.content.replace(/<[^>]+>/g, " ").replace(/\s+/g, "
 ---
 
 <CustomPage locale={locale} path="/help" title={`${t.nav.help} — FrankenPHP`} description={description}>
-  <section class="bg-dots relative overflow-hidden border-b border-border">
-    <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_70%_at_50%_30%,transparent_20%,var(--blume-background)_80%)]" aria-hidden="true"></div>
-    <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_45%_at_50%_0%,var(--fp-haze),transparent_70%)]" aria-hidden="true"></div>
-    <div class="relative mx-auto grid max-w-[75rem] items-center gap-12 px-6 py-20 md:py-28 lg:grid-cols-5">
-      <div class="flex min-w-0 flex-col items-start gap-6 lg:col-span-3">
-        <Eyebrow>{help.hero.overtitle}</Eyebrow>
-        <Heading as="h1" size="lg" html={help.hero.title} />
-        <p class="rich-text m-0 max-w-xl text-[19px]/[1.6] text-muted-foreground" set:html={help.hero.content} />
-        <Button href={contact} size="lg">{help.hero.button}</Button>
+  <section class="bg-lab-night text-[#f4eefb]">
+    <div class="mx-auto flex max-w-[80rem] flex-wrap items-center gap-12 px-6 py-20 md:px-8 md:py-24">
+      <div class="min-w-0 flex-[1_1_560px]">
+        <p class="m-0 inline-block rounded-full border-3 border-fp-deep bg-fp-green px-4 py-1.5 text-sm font-bold text-fp-night" style="rotate: -3deg">{help.hero.overtitle}</p>
+        <Heading as="h1" size="lg" tone="night" html={help.hero.title} class="mt-7" />
+        <p class="rich-text m-0 mt-6 max-w-[36rem] text-[19px]/[1.6] text-fp-mist [&_a]:text-white" set:html={help.hero.content} />
+        <Button href={contact} shadow="lilac" class="mt-9">{help.hero.button}</Button>
       </div>
-      <img src="/img/franken-heart.svg" alt="" width="320" height="343" fetchpriority="high" class="mx-auto h-auto w-full max-w-xs lg:col-span-2" />
+      <img src="/img/franken-heart.svg" alt="" width="340" height="364" fetchpriority="high" class="fp-float mx-auto h-auto w-full max-w-[340px] flex-[0_1_340px]" />
     </div>
   </section>
 
-  <div class="mx-auto flex max-w-[75rem] flex-col gap-28 px-6 pt-24">
+  <div class="mx-auto flex max-w-[80rem] flex-col gap-28 px-6 pt-28 md:px-8">
     {
       blocks.map((block, i) => (
-        <section class="grid items-center gap-12 md:grid-cols-5">
-          <div class="flex min-w-0 flex-col items-start gap-6 md:col-span-3">
-            <Heading html={block.title} />
-            <p class="rich-text m-0 text-base/relaxed text-muted-foreground" set:html={block.content} />
-            <Button href={block.href}>{block.button}</Button>
+        <section class:list={["flex flex-wrap items-center gap-14", i % 2 === 1 && "flex-row-reverse"]}>
+          <div class="min-w-0 flex-[1.2_1_460px]">
+            <Heading html={block.title} size="sm" />
+            <p class="rich-text m-0 mt-5 text-[17px]/[1.65] text-ink-muted" set:html={block.content} />
+            <Button href={block.href} size="md" class="mt-8">{block.button}</Button>
           </div>
-          <img
-            src={block.image}
-            alt=""
-            width={block.width}
-            height={block.height}
-            loading="lazy"
-            decoding="async"
-            class:list={["mx-auto h-auto max-h-80 w-full max-w-xs object-contain md:col-span-2", i % 2 === 1 && "md:order-first"]}
-          />
+          <div class="relative min-w-0 flex-[1_1_340px] p-5">
+            <div class:list={["absolute inset-3 rounded-[26px] border-3 border-line", i % 2 === 1 ? "bg-fp-lilac" : "bg-fp-green"]} style={`rotate: ${i % 2 === 1 ? 3 : -3}deg`}></div>
+            <div class="relative flex items-center justify-center rounded-[24px] border-3 border-line bg-card p-8 shadow-hard">
+              <img src={block.image} alt="" width={block.width} height={block.height} loading="lazy" decoding="async" class="h-auto max-h-72 w-full max-w-xs object-contain" />
+            </div>
+          </div>
         </section>
       ))
     }
-
-    <section class="grid items-center gap-10 rounded-2xl border border-border bg-surface-tint p-8 md:grid-cols-5 md:p-12">
-      <div class="flex min-w-0 flex-col gap-5 md:col-span-3">
-        <Heading html={help.go.title} />
-        <p class="rich-text m-0 text-base/relaxed text-muted-foreground" set:html={help.go.content} />
-      </div>
-      <img src="/img/gokenstein.svg" alt="" width="1881" height="1510" loading="lazy" decoding="async" class="mx-auto h-auto w-full max-w-xs md:col-span-2" />
-    </section>
-
-    <section class="@container">
-      <Heading html={help.further.title} />
-      <p class="m-0 mt-3 mb-9 text-lg text-muted-foreground">{help.further.subtitle}</p>
-      <ul class="m-0 grid list-none gap-px overflow-hidden rounded-2xl border border-border bg-border p-0 @xl:grid-cols-2 @4xl:grid-cols-3">
-        {help.further.content.map((item) => <Card title={item.title} content={item.content} />)}
-      </ul>
-    </section>
   </div>
+
+  <section class="bg-lab-night mt-30 border-t-3 border-fp-deep text-[#f4eefb]">
+    <div class="stitches"></div>
+    <div class="mx-auto flex max-w-[80rem] flex-wrap items-center gap-14 px-6 py-24 md:px-8">
+      <div class="min-w-0 flex-[1_1_460px]">
+        <Heading html={help.go.title} tone="night" size="sm" />
+        <p class="rich-text m-0 mt-5 text-[17px]/[1.65] text-fp-mist [&_a]:text-white" set:html={help.go.content} />
+      </div>
+      <div class="min-w-0 flex-[1_1_420px] rounded-[26px] border-3 border-fp-lilac bg-fp-paper p-6 shadow-[10px_10px_0_#b3d133]">
+        <img src="/img/gokenstein.svg" alt="" width="600" height="482" loading="lazy" decoding="async" class="block h-auto w-full" />
+      </div>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-[80rem] px-6 pt-28 md:px-8">
+    <Heading html={help.further.title} />
+    <p class="m-0 mt-4 mb-12 text-lg text-ink-muted">{help.further.subtitle}</p>
+    <ul class="m-0 grid list-none grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-5.5 p-0">
+      {
+        help.further.content.map((item) => (
+          <li class="fp-lift rounded-[22px] border-3 border-line bg-card p-6.5 shadow-hard">
+            <h3 class="m-0 font-display text-[21px]/tight font-extrabold text-heading" set:html={item.title} />
+            <p class="rich-text m-0 mt-2 text-[15px]/[1.6] text-ink-muted" set:html={item.content} />
+          </li>
+        ))
+      }
+    </ul>
+  </section>
 </CustomPage>

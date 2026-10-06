@@ -11,41 +11,22 @@
     "poweredBy": "Powered by"
   },
   "footer": {
-    "owner": "Brought to you by <a href=\"https://dunglas.dev/\">Kévin Dunglas</a>, creator of <a href=\"https://api-platform.com\">API Platform</a> and a member of the <a href=\"https://symfony.com\">Symfony</a> Core Team.",
-    "design": "Designed by <a href=\"https://pushpak1300.me\">Pushpak Chhajed</a>.",
-    "sponsor": "Sponsored by <a href=\"https://les-tilleuls.coop/en\">Les-Tilleuls.coop</a>."
+    "owner": "Brought to you by <a href=\"https://dunglas.dev/\">Kévin Dunglas</a>, creator of API Platform and a member of the Symfony Core Team.",
+    "design": "Design by <a href=\"https://pushpak1300.me\">Pushpak Chhajed</a>, illustrations by <a href=\"https://github.com/ginifizz\">Laury Sorriaux</a>.",
+    "sponsor": "Sponsored by <a href=\"https://les-tilleuls.coop/en\">Les-Tilleuls.coop</a>.",
+    "learn": "Learn",
+    "community": "Community",
+    "tagline": "Stitched together with Caddy, Go and C"
   },
   "notice": "This page has been translated by the community and may not be up to date. See <strong>the reference version</strong>.",
   "home": {
     "hero": {
-      "title": "The modern PHP app server.",
-      "tagline": "Written in Go.",
-      "subtitle": "FrankenPHP runs your PHP app from a single binary: worker mode, automatic HTTPS, HTTP/3 and Early Hints, built on top of Caddy.",
-      "pill": "Officially supported by the PHP Foundation",
-      "cta": "Get started"
-    },
-    "gettingStarted": {
-      "overtitle": "Install",
-      "title": "Up and running.",
-      "content": "Get a production-grade PHP server up and running in just one command!",
-      "dockerTab": "Docker",
-      "staticTab": "System",
-      "docker": "# Serve the public/ directory\ndocker run -v $PWD:/app/public \\\n  -p 443:443/tcp -p 443:443/udp \\\n  dunglas/frankenphp\n\n# Run a command-line script\ndocker run -v $PWD:/app \\\n  dunglas/frankenphp php script.php",
-      "standard": "# Install FrankenPHP on Linux or macOS\ncurl https://frankenphp.dev/install.sh | sh\n\n# Or on Windows, with PowerShell\nirm https://frankenphp.dev/install.ps1 | iex\n\n# Serve the public/ directory\nfrankenphp php-server -r public/\n\n# Run a command-line script\nfrankenphp php-cli script.php",
-      "subtitle": "In one command."
-    },
-    "modern": {
-      "overtitle": "Ready for the future",
-      "title": "Modern PHP,",
-      "items": [
-        "Runs the official PHP interpreter inside <a href=\"https://caddyserver.com\">Caddy</a>, a state-of-the-art web server.",
-        "Supports HTTP/1.1, HTTP/2 and HTTP/3 natively, with automatic HTTPS certificates.",
-        "Copy your PHP files into the document root, and you're done.",
-        "Builds <a href=\"/docs/embed\">standalone, self-executable binaries</a> of your web apps and CLI tools.",
-        "Works out of the box with popular extensions, including OPcache and Xdebug."
-      ],
-      "cta": "Try it",
-      "subtitle": "with nothing to wire up."
+      "title": "The modern PHP app server, written in Go.",
+      "subtitle": "One binary that boots your app once and keeps it alive. Worker mode, automatic HTTPS, HTTP/3 and Early Hints, stitched together on top of Caddy.",
+      "pill": "Officially supported by The PHP Foundation",
+      "cta": "Get started",
+      "platforms": "Free and open source. Runs on Linux, macOS, Windows and FreeBSD.",
+      "sticker": "It's alive!"
     },
     "technos": {
       "title": "Works natively with",
@@ -87,186 +68,200 @@
         }
       ]
     },
-    "worker": {
-      "overtitle": "Worker mode",
-      "title": "Boot once.",
-      "items": [
+    "tape": [
+      "Worker mode",
+      "HTTP/3",
+      "103 Early Hints",
+      "Mercure real-time",
+      "zstd · Brotli · gzip",
+      "Automatic HTTPS",
+      "Static binaries",
+      "Prometheus metrics",
+      "Graceful reload"
+    ],
+    "gettingStarted": {
+      "title": "One command to <strong class=\"hl\">run them all</strong>.",
+      "content": "A production-grade PHP server in one command. No PHP-FPM, no Nginx, no glue: copy your PHP files into the document root and you're done.",
+      "dockerTab": "Docker",
+      "staticTab": "System",
+      "docker": "# Serve the public/ directory\ndocker run -v $PWD:/app/public \\\n  -p 443:443/tcp -p 443:443/udp \\\n  dunglas/frankenphp\n\n# Run a command-line script\ndocker run -v $PWD:/app \\\n  dunglas/frankenphp php script.php",
+      "standard": "# Install FrankenPHP on Linux or macOS\ncurl https://frankenphp.dev/install.sh | sh\n\n# Or on Windows, with PowerShell\nirm https://frankenphp.dev/install.ps1 | iex\n\n# Serve the public/ directory\nfrankenphp php-server -r public/"
+    },
+    "anatomy": {
+      "title": "Anatomy of a <strong class=\"hl\">modern</strong> PHP server.",
+      "content": "Every part was stitched on for a reason. Here's what keeps the creature alive.",
+      "caption": "One binary. No PHP-FPM.",
+      "parts": [
         {
-          "title": "Stays in memory",
-          "content": "Boot your app once, then handle every request in a few milliseconds."
+          "part": "The bolts",
+          "title": "Automatic HTTPS",
+          "content": "Certificates issued, renewed and revoked for you, with Let's Encrypt or ZeroSSL.",
+          "href": "/docs/config"
         },
         {
-          "title": "Framework ready",
+          "part": "The brain",
+          "title": "Worker mode",
+          "content": "Boots your app once and keeps it in memory, ready in milliseconds.",
+          "href": "/docs/worker"
+        },
+        {
+          "part": "The stitches",
+          "title": "Caddy inside",
+          "content": "The official PHP executor sewn into Caddy, with every Caddy module at hand.",
+          "href": "/docs/config"
+        },
+        {
+          "part": "The eyes",
+          "title": "103 Early Hints",
+          "content": "Spots the assets a page needs and tells the browser before the response is ready.",
+          "href": "/docs/early-hints"
+        },
+        {
+          "part": "The ears",
+          "title": "Real-time",
+          "content": "A built-in Mercure hub pushes events from PHP to every connected browser.",
+          "href": "/docs/mercure"
+        },
+        {
+          "part": "The trunk",
+          "title": "HTTP/3 & compression",
+          "content": "HTTP/2 and HTTP/3 by default, with zstd, Brotli and gzip built in.",
+          "href": "/docs/config"
+        }
+      ]
+    },
+    "worker": {
+      "title": "Boot it once.<br>It stays <strong class=\"hl\">alive.</strong>",
+      "content": "Worker mode boots your application a single time and keeps it in memory. Every request after that skips the bootstrap, using plain old superglobals: no PSR-7 required.",
+      "stat": "3.5×",
+      "statText": "faster than PHP-FPM on API Platform apps, according to <a href=\"https://github.com/dunglas/frankenphp-demo/tree/main/benchmark\">our benchmarks</a>.",
+      "requests": "Requests",
+      "booted": "Your app, booted",
+      "bootedNote": "in memory, ready to answer",
+      "responses": "Responses",
+      "cta": "Read the worker docs",
+      "items": [
+        {
+          "title": "Straightforward",
           "content": "Supported natively by Laravel Octane, Symfony and API Platform."
         },
         {
-          "title": "Plain superglobals",
-          "content": "No PSR-7 required: your code keeps using <code>$_GET</code> and <code>$_POST</code>."
-        },
-        {
-          "title": "3.5× faster than PHP-FPM",
-          "content": "Measured on API Platform apps in <a href=\"https://github.com/dunglas/frankenphp-demo/tree/main/benchmark\">our public benchmarks</a>."
-        },
-        {
-          "title": "Goroutines inside",
-          "content": "Written in Go and C, built on Go's iconic concurrency model."
+          "title": "Efficient",
+          "content": "Written in Go and C, built on Go's iconic goroutines."
         },
         {
           "title": "Optional",
           "content": "Apps that aren't worker-ready are served as-is, in classic mode."
         },
         {
-          "title": "In-process",
-          "content": "One binary, with no external services to install or keep alive."
+          "title": "Easy deploy",
+          "content": "Runs in process: one binary, no external service needed."
         },
         {
           "title": "Watcher",
           "content": "Workers restart automatically each time your code changes."
+        },
+        {
+          "title": "Self-healing",
+          "content": "Restart a worker after N requests to keep memory leaks in check."
         }
-      ],
-      "subtitle": "Serve forever.",
-      "cta": "Read the worker docs"
+      ]
     },
     "config": {
-      "overtitle": "Configuration",
-      "title": "Three lines of config.",
+      "title": "Three lines. <strong class=\"hl\">Production-grade.</strong>",
+      "content": "That's all it takes to run a production-grade PHP server, powered by <a href=\"https://caddyserver.com\">Caddy</a>.",
       "code": "localhost {\n    # Enable compression (optional)\n    encode zstd br gzip\n    # Execute PHP files and serve assets\n    php_server\n}",
-      "content": "That's all you need to run a production-grade PHP server, powered by <a href=\"https://caddyserver.com\">Caddy</a>.",
-      "subtitle": "Production-grade by default.",
+      "sticker": "That's the whole file.",
       "cta": "Read the config docs"
     },
     "features": {
-      "overtitle": "Features",
-      "title": "FrankenPHP <strong class=\"hl\">at a glance</strong>",
+      "title": "Everything else, <strong class=\"hl\">in the box</strong>.",
       "items": [
-        {
-          "icon": "/img/box.svg",
-          "title": "Extensible",
-          "content": "Compatible with PHP 8.2+, most PHP extensions and all Caddy modules."
-        },
         {
           "icon": "/img/one.svg",
           "title": "Only one service",
-          "content": "Designed with simplicity in mind: only one service, only one binary! FrankenPHP doesn't need PHP-FPM, it uses its own SAPI specially handcrafted for Go web servers."
+          "content": "No PHP-FPM: FrankenPHP uses its own SAPI, handcrafted for Go web servers."
+        },
+        {
+          "icon": "/img/box.svg",
+          "title": "Extensible",
+          "content": "PHP 8.2+, most PHP extensions and all Caddy modules. Write extensions in Go, too."
         },
         {
           "icon": "/img/rocket.svg",
           "title": "Easy deploy",
-          "content": "Cloud Native app shipped as <a href=\"/docs/docker\">a Docker image</a>. Compatible with Kubernetes, and all modern cloud platforms. It's also possible to package your PHP app as <a href=\"/docs/embed\">a standalone, self-executable static binary</a>."
+          "content": "A <a href=\"/docs/docker\">Docker image</a>, Kubernetes, or your whole app as <a href=\"/docs/embed\">one static binary</a>."
         },
         {
           "icon": "/img/worker.svg",
           "title": "Worker mode",
-          "content": "<a href=\"/docs/worker\">Boot your application once</a> and keep it in memory! It is ready to handle incoming requests in a few milliseconds."
+          "content": "<a href=\"/docs/worker\">Boot once</a>, then answer each request in a few milliseconds."
         },
         {
           "icon": "/img/bulb.svg",
           "title": "103 Early Hints",
-          "content": "<a href=\"/docs/early-hints\">Early Hints</a> are a brand new feature of the web platform that can improve <a href=\"https://blog.cloudflare.com/early-hints/\">website load times by 30%</a>. FrankenPHP is the only PHP SAPI with Early Hints support!"
+          "content": "The only PHP SAPI with <a href=\"/docs/early-hints\">Early Hints</a>, for pages that start loading sooner."
         },
         {
           "icon": "/img/clock.svg",
           "title": "Real-time",
-          "content": "Built-in <a href=\"https://mercure.rocks\">Mercure</a> hub. Send events from your PHP apps to all connected browsers, they instantly receive the payload as a JavaScript event!"
+          "content": "A built-in <a href=\"https://mercure.rocks\">Mercure</a> hub sends events from PHP to every browser."
         },
         {
           "icon": "/img/zip.svg",
-          "title": "Brotli, Zstandard and Gzip compression",
-          "content": "Modern compression formats are supported out-of-the-box."
+          "title": "Modern compression",
+          "content": "Zstandard, Brotli and gzip, supported out of the box."
         },
         {
           "icon": "/img/log.svg",
           "title": "Structured logging",
-          "content": "Bring a more defined format and details to your logging."
+          "content": "Logs with a defined format and the details you need."
         },
         {
           "icon": "/img/metrics.svg",
-          "title": "Prometheus metrics and tracing",
-          "content": "Built-in <a href=\"https://caddyserver.com/docs/metrics\">Prometheus support</a>!"
+          "title": "Metrics & tracing",
+          "content": "Built-in <a href=\"https://caddyserver.com/docs/metrics\">Prometheus support</a>, with no extra service to run."
         },
         {
           "icon": "/img/http.svg",
           "title": "HTTP/2 & HTTP/3",
-          "content": "Native support for HTTPS, HTTP/2 and <strong>HTTP/3</strong>."
+          "content": "Native support for HTTPS, HTTP/2 and HTTP/3."
         },
         {
           "icon": "/img/https.svg",
-          "title": "HTTPS Automation",
-          "content": "Automatic HTTPS certificate generation, renewal and revocation."
+          "title": "HTTPS automation",
+          "content": "Certificates generated, renewed and revoked automatically."
         },
         {
           "icon": "/img/reload.svg",
           "title": "Graceful reload",
-          "content": "Deploy your apps with zero downtime thanks to graceful reloads."
+          "content": "Deploy with zero downtime thanks to graceful reloads."
         }
       ]
     },
-    "bento": {
-      "overtitle": "Building blocks",
-      "title": "Everything PHP needs.",
-      "subtitle": "In one binary, without the glue.",
+    "go": {
+      "sticker": "Go + C + PHP",
+      "title": "Born in a lab. <strong class=\"hl\">Written in Go.</strong>",
+      "content": "FrankenPHP is a Caddy module and a library: embed the PHP interpreter in any Go program and serve PHP scripts through <code>net/http</code>.",
+      "code": "server, _ := frankenphp.NewServer(\"public/\")\nfrankenphp.Init(frankenphp.WithServer(server))\ndefer frankenphp.Shutdown()\n\nhttp.HandleFunc(\"/\", func(w http.ResponseWriter, r *http.Request) {\n    server.ServeHTTP(w, r)\n})",
+      "cta": "Use FrankenPHP as a Go library"
+    },
+    "modern": {
+      "title": "<strong class=\"hl\">Moderner</strong> PHP than ever!",
       "items": [
-        {
-          "id": "one",
-          "title": "One binary",
-          "content": "No PHP-FPM, no reverse proxy. FrankenPHP ships its own SAPI, handcrafted for Go web servers.",
-          "href": "/docs/classic"
-        },
-        {
-          "id": "worker",
-          "title": "Worker mode",
-          "content": "Boot your app once and keep it in memory. Up to 3.5× faster than PHP-FPM on API Platform apps.",
-          "href": "/docs/worker"
-        },
-        {
-          "id": "https",
-          "title": "Automatic HTTPS",
-          "content": "Certificates are issued, renewed and revoked for you, with Let's Encrypt or ZeroSSL.",
-          "href": "/docs/config"
-        },
-        {
-          "id": "http",
-          "title": "HTTP/2 & HTTP/3",
-          "content": "Modern protocols are on by default, with zstd, Brotli and gzip compression built in.",
-          "href": "/docs/config"
-        },
-        {
-          "id": "hints",
-          "title": "103 Early Hints",
-          "content": "The only PHP SAPI that supports Early Hints, so browsers can preload assets before your response is ready.",
-          "href": "/docs/early-hints"
-        },
-        {
-          "id": "realtime",
-          "title": "Real-time",
-          "content": "A built-in Mercure hub pushes events from PHP to every connected browser.",
-          "href": "/docs/mercure"
-        },
-        {
-          "id": "deploy",
-          "title": "Deploy anywhere",
-          "content": "Ship a Docker image, deploy to Kubernetes, or pack your whole app into a single static binary.",
-          "href": "/docs/embed"
-        },
-        {
-          "id": "reload",
-          "title": "Hot & graceful reload",
-          "content": "Workers restart when your code changes. Ship to production with zero downtime.",
-          "href": "/docs/hot-reload"
-        },
-        {
-          "id": "metrics",
-          "title": "Observable",
-          "content": "Prometheus metrics, tracing and structured logs, with no extra services to run.",
-          "href": "/docs/metrics"
-        }
-      ]
+        "Runs the official PHP interpreter inside <a href=\"https://caddyserver.com\">Caddy</a>, a state-of-the-art web server.",
+        "Supports HTTP/1.1, HTTP/2 and HTTP/3 natively, with automatic HTTPS certificates.",
+        "Copy your PHP files into the document root, and you're done.",
+        "Builds <a href=\"/docs/embed\">standalone, self-executable binaries</a> of your web apps and CLI tools.",
+        "Works out of the box with popular extensions, including OPcache and Xdebug."
+      ],
+      "cta": "Try it"
     },
     "helpCta": {
-      "overtitle": "Need help?",
-      "title": "Let's create something great.",
-      "content": "Les-Tilleuls.coop, the team behind FrankenPHP, helps with migrations, hosting and performance tuning.",
-      "button": "Get in touch"
+      "title": "Need a hand? <strong class=\"hl\">We've got heart.</strong>",
+      "content": "<a href=\"https://les-tilleuls.coop/en\">Les-Tilleuls.coop</a>, the cooperative behind FrankenPHP, helps teams migrate, host and speed up their PHP apps.",
+      "button": "Get in touch",
+      "secondary": "See how we help"
     }
   },
   "help": {
