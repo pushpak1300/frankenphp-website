@@ -252,7 +252,6 @@
     }
   },
   "ui": {
-    "latestRelease": "Dernière version sur GitHub",
     "copy": "Copier dans le presse-papiers",
     "copied": "Copié !",
     "language": "Langue"

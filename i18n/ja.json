@@ -252,7 +252,6 @@
     }
   },
   "ui": {
-    "latestRelease": "GitHub の最新リリース",
     "copy": "クリップボードにコピー",
     "copied": "コピーしました！",
     "language": "言語"

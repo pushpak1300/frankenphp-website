@@ -59,13 +59,6 @@ const chips = ["HTTPS", "HTTP/2", "HTTP/3", "zstd", "Brotli", "gzip", "Early Hin
   <section class="slant-b relative -mt-16 overflow-hidden bg-fp-night pt-16 text-white">
     <div class="mx-auto grid max-w-6xl items-center gap-12 px-6 pt-16 pb-36 md:pt-24 lg:grid-cols-5">
       <div class="flex min-w-0 flex-col items-start gap-7 lg:col-span-3">
-        <a
-          href="https://github.com/php/frankenphp/releases"
-          class="inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-white/5 px-3.5 py-1.5 font-mono text-eyebrow text-fp-green-light no-underline transition-colors hover:border-fp-green/60 hover:bg-white/10"
-        >
-          <span class="size-2 rounded-full bg-fp-green" aria-hidden="true"></span>
-          {t.ui.latestRelease} <span aria-hidden="true">→</span>
-        </a>
         <Heading as="h1" size="xl" html={heroHtml} invert />
         <p class="m-0 max-w-xl text-lg/relaxed text-white/80 md:text-xl/relaxed">{t.meta.description}</p>
         <div class="flex w-full flex-wrap items-center gap-3.5">
@@ -119,7 +112,7 @@ const chips = ["HTTPS", "HTTP/2", "HTTP/3", "zstd", "Brotli", "gzip", "Early Hin
                 aria-controls={`fp-panel-${tab.id}`}
                 aria-selected={i === 0 ? "true" : "false"}
                 tabindex={i === 0 ? 0 : -1}
-                class="min-h-11 cursor-pointer rounded-t-lg border-b-2 border-transparent px-4 font-mono text-eyebrow text-white/60 transition-colors hover:text-white aria-selected:border-fp-green aria-selected:bg-white/5 aria-selected:text-fp-green"
+                class="min-h-11 cursor-pointer rounded-t-lg border-b-2 border-transparent px-4 text-sm font-medium text-white/60 transition-colors hover:text-white aria-selected:border-fp-green aria-selected:bg-white/5 aria-selected:text-fp-green"
               >
                 {tab.label}
               </button>
@@ -146,7 +139,7 @@ const chips = ["HTTPS", "HTTP/2", "HTTP/3", "zstd", "Brotli", "gzip", "Early Hin
       <CodePanel code={home.config.code} lang="caddyfile" filename="Caddyfile" class="@3xl:col-span-3" />
       <div class="flex flex-col justify-center gap-6 bg-background p-8 @3xl:col-span-2">
         <p class="rich-text m-0 text-base/relaxed text-foreground/85" set:html={home.config.content} />
-        <ul class="m-0 flex list-none flex-wrap gap-2 p-0 font-mono text-eyebrow">
+        <ul class="m-0 flex list-none flex-wrap gap-2 p-0 text-sm font-medium">
           {chips.map((chip) => <li class="rounded-full border border-border bg-muted px-3 py-1 text-foreground">{chip}</li>)}
         </ul>
       </div>

@@ -11,8 +11,8 @@ const { invert = false, id, class: className } = Astro.props;
 <p
   id={id}
   class:list={[
-    "m-0 font-mono text-eyebrow",
-    invert ? "text-fp-green-light" : "text-muted-foreground",
+    "m-0 text-sm font-semibold tracking-wide uppercase",
+    invert ? "text-fp-green" : "text-highlight",
     className,
   ]}
 >

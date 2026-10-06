@@ -252,7 +252,6 @@
     }
   },
   "ui": {
-    "latestRelease": "GitHub 上的最新版本",
     "copy": "复制到剪贴板",
     "copied": "已复制！",
     "language": "语言"
