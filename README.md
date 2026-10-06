@@ -5,25 +5,25 @@ The site is built with [Blume](https://useblume.dev), a Markdown-first documenta
 
 ## Getting started
 
-You need Node.js 22.12 or newer and npm.
+You need [Bun](https://bun.sh).
 
 ```console
 git clone git@github.com:dunglas/frankenphp-website.git
 cd frankenphp-website
-npm install
-npm run dev
+bun install
+bun run dev
 ```
 
 The site is served at http://localhost:4321 with hot reload.
 
-To build the production site in `dist/` and preview it:
+To build the production site and preview it:
 
 ```console
-npm run build
-npm run preview
+bun run build
+bun run preview
 ```
 
-`npm run doctor` checks the configuration and the content, and `npx blume validate` checks every internal link.
+`bun run doctor` checks the configuration and the content, and `bunx blume validate` checks every internal link.
 
 ## Project structure
 
@@ -75,22 +75,22 @@ The documentation used to be copied from [php/frankenphp](https://github.com/php
 It now lives in this repository. To replace `content/` with a fresh copy converted from upstream, run:
 
 ```console
-npm run import-docs -- --force
+bun run import-docs --force
 ```
 
 Set `FRANKENPHP_REPO=/path/to/frankenphp` to import from a local checkout instead of cloning, and `GITHUB_KEY` to clone with a token.
 
 ## Deployment
 
-`npm run build` writes the static site to `dist/`, ready for any static host.
+The site is built with Blume's `node()` server adapter: `bun run build` writes the static pages to `dist/client/` and the server to `dist/server/entry.mjs`.
 The build first downloads `install.sh` and `install.ps1` from php/frankenphp, so `https://frankenphp.dev/install.sh` always serves the latest installer.
 
-`npm start` serves `dist/` with a small Node.js server (`server.mjs`) that listens on `$PORT` (3000 by default). On [Laravel Cloud](https://cloud.laravel.com), use:
+`bun run start` runs the server with Bun. It listens on `$PORT` (3000 by default) and on every IPv4 and IPv6 address (`HOST=::`); set `HOST=0.0.0.0` on a machine without IPv6. On [Laravel Cloud](https://cloud.laravel.com), use:
 
-| Setting         | Value                                     |
-| --------------- | ----------------------------------------- |
-| Build commands  | `npm ci --audit false` and `npm run build` |
-| Start command   | `npm start`                               |
+| Setting         | Value                                                  |
+| --------------- | ------------------------------------------------------ |
+| Build commands  | `bun install --frozen-lockfile` and `bun run build`    |
+| Start command   | `bun run start`                                        |
 
 ## SEO and AI agents
 
@@ -98,4 +98,5 @@ The build generates, with no extra step:
 
 - `sitemap.xml`, `robots.txt`, canonical URLs, `hreflang` alternates for every language, Open Graph cards and schema.org structured data,
 - `llms.txt` and `llms-full.txt`, a Markdown version of every page at its URL plus `.md` (for instance `/docs/worker.md`), a JSON API (`/api/docs/pages.json`) and an agent skill at `/skill.md`,
+- an MCP server at `/mcp` that coding agents can search and read the docs through (`claude mcp add --transport http frankenphp https://frankenphp.dev/mcp`),
 - the `go-import` meta tag that makes `go get frankenphp.dev/...` resolve to the php/frankenphp repository.

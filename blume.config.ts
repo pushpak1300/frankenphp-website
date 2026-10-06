@@ -1,4 +1,5 @@
 import { defineConfig } from "blume";
+import { node } from "blume/deploy";
 import { pagefind } from "blume/search";
 
 import en from "./i18n/en.json";
@@ -129,9 +130,12 @@ export default defineConfig({
     },
     skillMd: true,
     catalog: true,
+    mcp: {
+      enabled: true,
+      instructions:
+        "Search and read the FrankenPHP documentation: installation, worker mode, configuration (Caddyfile), Docker images, deployment, Laravel, Symfony and WordPress integrations.",
+    },
   },
 
-  deployment: {
-    site: SITE,
-  },
+  deployment: node({ site: SITE }),
 });
