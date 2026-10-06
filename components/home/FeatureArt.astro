@@ -1,0 +1,119 @@
+---
+// The small wireframe drawing at the foot of each "Building blocks" cell.
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+const row = "flex justify-between rounded-lg border border-line px-3 py-1.5";
+const panel =
+  "box-border flex h-[156px] flex-col gap-2.5 rounded-t-[10px] border border-b-0 border-line bg-surface-tint px-4 py-3.5";
+const chip = "rounded-lg border border-line px-[11px] py-[5px]";
+---
+
+<div class="pointer-events-none relative mt-auto h-[170px] font-mono text-xs text-muted-foreground select-none" aria-hidden="true">
+  {
+    id === "one" && (
+      <div class="flex flex-col items-center pt-[18px]">
+        <span class="rounded-lg border border-line-strong bg-surface-soft px-3.5 py-[7px] text-heading">frankenphp</span>
+        <span class="h-[22px] w-px border-l border-dashed border-dash" />
+        <div class="flex gap-2">
+          <span class={chip}>Caddy</span>
+          <span class={chip}>PHP</span>
+          <span class={chip}>Go</span>
+        </div>
+        <span class="mt-4 text-accent-ink">1 process · 0 sidecars</span>
+      </div>
+    )
+  }
+  {
+    id === "worker" && (
+      <div class="flex flex-col gap-2 pt-3.5">
+        <div class={row}><span class="text-heading">boot()</span><span>once</span></div>
+        <div class:list={[row, "ml-6"]}><span>handle_request</span><span class="text-accent-ink">in memory</span></div>
+        <div class:list={[row, "ml-12"]}><span>handle_request</span><span class="text-accent-ink">in memory</span></div>
+        <div class:list={[row, "ml-[72px]"]}><span>handle_request</span><span class="text-accent-ink">in memory</span></div>
+      </div>
+    )
+  }
+  {
+    id === "https" && (
+      <div class="pt-3.5">
+        <div class={panel}>
+          <div class="flex items-center gap-2 text-heading">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="11" width="16" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></svg>
+            example.com
+          </div>
+          <div class="flex justify-between"><span>issuer</span><span>Let's Encrypt</span></div>
+          <div class="flex justify-between"><span>renewal</span><span>automatic</span></div>
+          <div class="flex justify-between"><span>manual steps</span><span class="text-accent-ink">0</span></div>
+        </div>
+      </div>
+    )
+  }
+  {
+    id === "http" && (
+      <div class="flex flex-col items-center gap-3.5 pt-[22px]">
+        <div class="flex flex-wrap justify-center gap-2">
+          <span class="rounded-full border border-line px-3 py-[5px]">HTTP/1.1</span>
+          <span class="rounded-full border border-line px-3 py-[5px]">HTTP/2</span>
+          <span class="rounded-full border border-accent-ink px-3 py-[5px] text-heading">HTTP/3</span>
+        </div>
+        <div class="flex gap-2.5 text-dim"><span>zstd</span><span>·</span><span>br</span><span>·</span><span>gzip</span></div>
+      </div>
+    )
+  }
+  {
+    id === "hints" && (
+      <div class="flex flex-col gap-3.5 pt-[22px]">
+        <div class="flex items-center gap-3"><span class="w-8 text-accent-ink">103</span><span class="h-px flex-1 bg-accent-ink" /><span>rel=preload app.css</span></div>
+        <div class="flex items-center gap-3"><span class="w-8">···</span><span class="h-0 flex-1 border-t border-dashed border-dash" /><span>rendering…</span></div>
+        <div class="flex items-center gap-3"><span class="w-8 text-heading">200</span><span class="h-px flex-1 bg-dash" /><span>text/html</span></div>
+      </div>
+    )
+  }
+  {
+    id === "realtime" && (
+      <>
+        <span class="absolute top-2.5 left-1/2 -translate-x-1/2 rounded-lg border border-line-strong px-3.5 py-1.5 text-heading">mercure</span>
+        <span class="absolute top-[42px] left-1/2 h-7 w-0 border-l border-dashed border-dash" />
+        <span class="absolute inset-x-1/4 top-[70px] h-8 rounded-t-md border border-b-0 border-dashed border-dash" />
+        <span class="absolute top-[66px] left-1/2 -ml-1 size-2 rounded-full bg-accent-ink" />
+        <span class="absolute bottom-0 left-[5%] flex h-[66px] w-2/5 items-center justify-center rounded-t-[10px] border border-b-0 border-line text-sm text-foreground">♡ 12</span>
+        <span class="absolute right-[5%] bottom-0 flex h-[66px] w-2/5 items-center justify-center rounded-t-[10px] border border-b-0 border-line text-sm text-foreground">♡ 12</span>
+      </>
+    )
+  }
+  {
+    id === "deploy" && (
+      <div class="flex flex-col gap-2 pt-3.5 text-heading">
+        <div class="rounded-lg border border-line px-3 py-[7px]">docker run dunglas/frankenphp</div>
+        <div class="rounded-lg border border-line px-3 py-[7px]">kubectl apply -f app.yaml</div>
+        <div class="flex justify-between rounded-lg border border-line px-3 py-[7px]"><span>./my-app php-server</span><span class="text-accent-ink">static binary</span></div>
+      </div>
+    )
+  }
+  {
+    id === "reload" && (
+      <div class="pt-3.5">
+        <div class={panel}>
+          <div class="flex justify-between"><span class="text-heading">src/Kernel.php</span><span>changed</span></div>
+          <div class="flex justify-between"><span>worker 1</span><span class="text-accent-ink">↻ restarted</span></div>
+          <div class="flex justify-between"><span>worker 2</span><span class="text-accent-ink">↻ restarted</span></div>
+          <div class="flex justify-between"><span>dropped requests</span><span>0</span></div>
+        </div>
+      </div>
+    )
+  }
+  {
+    id === "metrics" && (
+      <>
+        <span class="absolute top-2.5 left-0">frankenphp_busy_workers</span>
+        <svg viewBox="0 0 320 120" preserveAspectRatio="none" class="absolute inset-x-0 bottom-0 h-[120px] w-full" fill="none">
+          <path d="M0 30H320M0 70H320M0 110H320" stroke="var(--fp-line-strong)" stroke-dasharray="2 5" />
+          <path d="M0 100 L40 84 L80 90 L120 58 L160 70 L200 34 L240 48 L320 14" stroke="var(--fp-accent-ink)" stroke-width="2" stroke-linejoin="round" vector-effect="non-scaling-stroke" />
+        </svg>
+      </>
+    )
+  }
+</div>

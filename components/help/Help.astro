@@ -23,26 +23,28 @@ const blocks = [
 const description = help.hero.content.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim().slice(0, 158);
 ---
 
-<CustomPage locale={locale} path="/help" title={`${t.nav.help} — FrankenPHP`} description={description} transparentHeader>
-  <section class="slant-b relative -mt-16 overflow-hidden bg-fp-night pt-16 text-white">
-    <div class="mx-auto grid max-w-6xl items-center gap-12 px-6 pt-16 pb-36 md:pt-24 lg:grid-cols-5">
+<CustomPage locale={locale} path="/help" title={`${t.nav.help} — FrankenPHP`} description={description}>
+  <section class="bg-dots relative overflow-hidden border-b border-border">
+    <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_70%_at_50%_30%,transparent_20%,var(--blume-background)_80%)]" aria-hidden="true"></div>
+    <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_60%_45%_at_50%_0%,var(--fp-haze),transparent_70%)]" aria-hidden="true"></div>
+    <div class="relative mx-auto grid max-w-[75rem] items-center gap-12 px-6 py-20 md:py-28 lg:grid-cols-5">
       <div class="flex min-w-0 flex-col items-start gap-6 lg:col-span-3">
-        <Eyebrow invert>{help.hero.overtitle}</Eyebrow>
-        <Heading as="h1" size="lg" html={help.hero.title} invert />
-        <p class="rich-text-invert m-0 max-w-xl text-lg/relaxed text-white/80" set:html={help.hero.content} />
-        <Button href={contact} variant="accent" size="lg">{help.hero.button}</Button>
+        <Eyebrow>{help.hero.overtitle}</Eyebrow>
+        <Heading as="h1" size="lg" html={help.hero.title} />
+        <p class="rich-text m-0 max-w-xl text-[19px]/[1.6] text-muted-foreground" set:html={help.hero.content} />
+        <Button href={contact} size="lg">{help.hero.button}</Button>
       </div>
       <img src="/img/franken-heart.svg" alt="" width="320" height="343" fetchpriority="high" class="mx-auto h-auto w-full max-w-xs lg:col-span-2" />
     </div>
   </section>
 
-  <div class="mx-auto flex max-w-6xl flex-col gap-24 px-6 pt-12">
+  <div class="mx-auto flex max-w-[75rem] flex-col gap-28 px-6 pt-24">
     {
       blocks.map((block, i) => (
         <section class="grid items-center gap-12 md:grid-cols-5">
           <div class="flex min-w-0 flex-col items-start gap-6 md:col-span-3">
             <Heading html={block.title} />
-            <p class="rich-text m-0 text-base/relaxed text-foreground/85" set:html={block.content} />
+            <p class="rich-text m-0 text-base/relaxed text-muted-foreground" set:html={block.content} />
             <Button href={block.href}>{block.button}</Button>
           </div>
           <img
@@ -58,10 +60,10 @@ const description = help.hero.content.replace(/<[^>]+>/g, " ").replace(/\s+/g, "
       ))
     }
 
-    <section class="grid items-center gap-10 rounded-3xl bg-fp-night p-8 text-white md:grid-cols-5 md:p-12">
+    <section class="grid items-center gap-10 rounded-2xl border border-border bg-surface-tint p-8 md:grid-cols-5 md:p-12">
       <div class="flex min-w-0 flex-col gap-5 md:col-span-3">
-        <Heading html={help.go.title} invert />
-        <p class="rich-text-invert m-0 text-base/relaxed text-white/80" set:html={help.go.content} />
+        <Heading html={help.go.title} />
+        <p class="rich-text m-0 text-base/relaxed text-muted-foreground" set:html={help.go.content} />
       </div>
       <img src="/img/gokenstein.svg" alt="" width="1881" height="1510" loading="lazy" decoding="async" class="mx-auto h-auto w-full max-w-xs md:col-span-2" />
     </section>
@@ -69,8 +71,8 @@ const description = help.hero.content.replace(/<[^>]+>/g, " ").replace(/\s+/g, "
     <section class="@container">
       <Heading html={help.further.title} />
       <p class="m-0 mt-3 mb-9 text-lg text-muted-foreground">{help.further.subtitle}</p>
-      <ul class="m-0 grid list-none gap-4 p-0 @xl:grid-cols-2 @4xl:grid-cols-3">
-        {help.further.content.map((item) => <Card title={item.title} content={item.content} class="rounded-2xl border border-border" />)}
+      <ul class="m-0 grid list-none gap-px overflow-hidden rounded-2xl border border-border bg-border p-0 @xl:grid-cols-2 @4xl:grid-cols-3">
+        {help.further.content.map((item) => <Card title={item.title} content={item.content} />)}
       </ul>
     </section>
   </div>

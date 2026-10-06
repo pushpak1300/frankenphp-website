@@ -2,6 +2,8 @@ import { defineConfig } from "blume";
 import { node } from "blume/deploy";
 import { pagefind } from "blume/search";
 
+import { codeThemes } from "./code-themes";
+
 import en from "./i18n/en.json";
 import es from "./i18n/es.json";
 import fr from "./i18n/fr.json";
@@ -33,14 +35,6 @@ export default defineConfig({
     },
     text: "",
   },
-  banner: {
-    content:
-      "API Platform Conference 2026 · Sep 17–18, 2026 — connect with the FrankenPHP creators and explore real-world case studies.",
-    link: { text: "Learn more", href: "https://api-platform.com/en/con" },
-    dismissible: true,
-    id: "api-platform-con-2026",
-  },
-
   content: {
     root: "content",
   },
@@ -75,22 +69,22 @@ export default defineConfig({
   },
 
   theme: {
-    accent: { light: "#390075", dark: "#b3d133" },
+    accent: { light: "#16111e", dark: "#b3d133" },
     action: "#b3d133",
-    background: { light: "#ffffff", dark: "#12001f" },
+    background: { light: "#ffffff", dark: "#0d0a12" },
     radius: "md",
-    mode: "system",
+    mode: "dark",
     fonts: {
-      display: { name: "Poppins", weights: [500, 600, 700, 800] },
-      body: { name: "Poppins", weights: [400, 500, 600, 700] },
-      mono: "jetbrains-mono",
+      display: "inter",
+      body: "inter",
+      mono: "ibm-plex-mono",
     },
   },
 
   markdown: {
     externalLinks: true,
     code: {
-      theme: { light: "dracula", dark: "dracula" },
+      theme: codeThemes,
     },
   },
 
@@ -101,7 +95,7 @@ export default defineConfig({
   seo: {
     metatags: {
       "go-import": `frankenphp.dev git ${REPO}`,
-      "theme-color": "#230143",
+      "theme-color": "#0d0a12",
     },
     organization: {
       name: "FrankenPHP",

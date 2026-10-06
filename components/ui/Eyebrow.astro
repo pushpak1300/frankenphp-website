@@ -1,20 +1,12 @@
 ---
 interface Props {
-  invert?: boolean;
   id?: string;
   class?: string;
 }
 
-const { invert = false, id, class: className } = Astro.props;
+const { id, class: className } = Astro.props;
 ---
 
-<p
-  id={id}
-  class:list={[
-    "m-0 text-sm font-semibold tracking-wide uppercase",
-    invert ? "text-fp-green" : "text-highlight",
-    className,
-  ]}
->
+<p id={id} class:list={["m-0 font-mono text-eyebrow font-medium tracking-[0.12em] text-dim uppercase", className]}>
   <slot />
 </p>

@@ -5,25 +5,23 @@ import Heading from "../ui/Heading.astro";
 interface Props {
   overtitle?: string;
   title: string;
-  lead?: string;
+  subtitle?: string;
   href?: string;
   hrefLabel?: string;
-  big?: boolean;
 }
 
-const { overtitle, title, lead, href, hrefLabel, big = false } = Astro.props;
+const { overtitle, title, subtitle, href, hrefLabel } = Astro.props;
 ---
 
-<section class="mx-auto max-w-6xl px-6 pt-24 pb-4 md:pt-28">
-  <div class="mb-9 flex flex-wrap items-end justify-between gap-x-10 gap-y-4">
-    <div class="flex max-w-2xl min-w-0 flex-col gap-3.5">
-      {overtitle && <Eyebrow>{overtitle}</Eyebrow>}
-      <Heading html={title} size={big ? "lg" : "md"} />
-      {lead && <p class="rich-text m-0 mt-1 max-w-xl text-lg/relaxed text-muted-foreground" set:html={lead} />}
+<section class="mx-auto max-w-[75rem] px-6 pt-32">
+  <div class="mb-10 flex flex-wrap items-end justify-between gap-x-10 gap-y-4">
+    <div class="min-w-0">
+      {overtitle && <Eyebrow class="mb-4">{overtitle}</Eyebrow>}
+      <Heading html={title} subtitle={subtitle} />
     </div>
     {
       href && (
-        <a href={href} class="inline-flex min-h-11 items-center gap-1.5 font-semibold text-link no-underline hover:underline">
+        <a href={href} class="inline-flex min-h-11 items-center gap-1.5 text-sm font-medium text-heading no-underline hover:underline">
           {hrefLabel} <span aria-hidden="true">→</span>
         </a>
       )

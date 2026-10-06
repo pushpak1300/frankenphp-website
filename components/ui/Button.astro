@@ -1,27 +1,27 @@
 ---
 interface Props {
   href: string;
-  variant?: "accent" | "primary";
+  variant?: "accent" | "invert";
   size?: "md" | "lg";
   class?: string;
 }
 
-const { href, variant = "primary", size = "md", class: className } = Astro.props;
+const { href, variant = "accent", size = "md", class: className } = Astro.props;
 ---
 
 <a
   href={href}
   class:list={[
-    "inline-flex items-center gap-2 rounded-xl no-underline transition-transform hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fp-green motion-reduce:transition-none motion-reduce:hover:translate-y-0",
+    "group inline-flex items-center gap-2 rounded-full font-semibold no-underline transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-fp-green",
     {
-      "bg-fp-green text-fp-night": variant === "accent",
-      "bg-primary text-primary-foreground": variant === "primary",
-      "h-12 px-5 font-semibold": size === "md",
-      "h-13 px-6 font-bold": size === "lg",
+      "bg-fp-green text-[#141414] hover:bg-fp-lime": variant === "accent",
+      "bg-invert text-invert-foreground hover:opacity-90": variant === "invert",
+      "h-11 px-[22px] text-sm": size === "md",
+      "h-12 px-6 text-[15px]": size === "lg",
     },
     className,
   ]}
 >
   <slot />
-  <span aria-hidden="true">→</span>
+  <span aria-hidden="true" class="transition-transform group-hover:translate-x-0.5 motion-reduce:transition-none">→</span>
 </a>

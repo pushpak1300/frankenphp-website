@@ -1,6 +1,8 @@
 ---
 import { Code } from "astro:components";
 
+import { codeThemes } from "../../code-themes";
+
 interface Props {
   code: string;
   lang: string;
@@ -11,14 +13,20 @@ interface Props {
 const { code, lang, filename, class: className } = Astro.props;
 ---
 
-<div class:list={["min-w-0 bg-code-surface", className]}>
+<div class:list={["code-ink min-w-0 bg-code-surface", className]}>
   {
     filename && (
-      <div class="flex h-11 items-center border-b border-white/10 px-4 font-mono text-eyebrow text-white/60">
+      <div class="border-b border-border px-5 py-3 font-mono text-xs text-dim">
         {filename}
       </div>
     )
   }
   <slot />
-  <Code code={code.trim()} lang={lang} theme="dracula" class="m-0 overflow-x-auto bg-transparent! px-6 py-5 text-sm/7" />
+  <Code
+    code={code.trim()}
+    lang={lang as never}
+    themes={codeThemes as never}
+    defaultColor={false}
+    class="m-0 overflow-x-auto px-7 py-6 font-mono text-sm/[1.9]"
+  />
 </div>
