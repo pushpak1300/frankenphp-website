@@ -85,6 +85,13 @@ Set `FRANKENPHP_REPO=/path/to/frankenphp` to import from a local checkout instea
 `npm run build` writes the static site to `dist/`, ready for any static host.
 The build first downloads `install.sh` and `install.ps1` from php/frankenphp, so `https://frankenphp.dev/install.sh` always serves the latest installer.
 
+`npm start` serves `dist/` with a small Node.js server (`server.mjs`) that listens on `$PORT` (3000 by default). On [Laravel Cloud](https://cloud.laravel.com), use:
+
+| Setting         | Value                                     |
+| --------------- | ----------------------------------------- |
+| Build commands  | `npm ci --audit false` and `npm run build` |
+| Start command   | `npm start`                               |
+
 ## SEO and AI agents
 
 The build generates, with no extra step:
