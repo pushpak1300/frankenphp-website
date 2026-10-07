@@ -8,7 +8,7 @@
     "import-docs": "node scripts/import-docs.mjs",
     "dev": "blume dev",
     "build": "node scripts/fetch-installers.mjs && blume build && node scripts/postbuild.mjs",
-    "start": "HOST=${HOST:-::} PORT=${PORT:-3000} bun dist/server/entry.mjs",
+    "start": "bun server.mjs",
     "preview": "blume preview",
     "doctor": "blume doctor"
   },
